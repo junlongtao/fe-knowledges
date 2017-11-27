@@ -1,7 +1,7 @@
 # fe-notes
 frontend dev notes&amp;keywords
 
-1. seo notes
+# seo notes
 
   title>description>keywords
   
@@ -16,11 +16,11 @@ frontend dev notes&amp;keywords
   speed
   
   
-2. sort
+# sort
 
   快排，堆排，归并排nlog2(n)>插入，冒泡，选择n2
   
-3. 会话跟踪
+# 会话跟踪
 
   cookie,url,input[type=hidden] => session id => server session
   
