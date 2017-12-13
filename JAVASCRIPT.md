@@ -5,10 +5,7 @@
 
 **JavaScript的组成**
 
-- JavaScript 由以下三部分组成：
-  - ECMAScript（核心）：JavaScript 语言基础
-  - DOM（文档对象模型）：规定了访问HTML和XML的接口
-  - BOM（浏览器对象模型）：提供了浏览器窗口之间进行交互的对象和方法
+- js=es+dom+bom
       
 **JS的基本数据类型和引用数据类型**
 
