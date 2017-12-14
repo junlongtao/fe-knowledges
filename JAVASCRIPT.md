@@ -9,120 +9,94 @@
       
 **JS的基本数据类型和引用数据类型**
 
-- 基本数据类型：undefined、null、boolean、number、string、symbol
-- 引用数据类型：object、array、function
+- 基本：undefined、null、boolean、number、string、symbol
+- 引用：object、array、function
 
 **检测浏览器版本版本有哪些方式？**
-- 根据 navigator.userAgent   //  UA.toLowerCase().indexOf('chrome')
-- 根据 window 对象的成员       // 'ActiveXObject' in window
+- navigator.userAgent.toLowerCase().indexOf('chrome') 
 
 **介绍JS有哪些内置对象？**
 
-- 数据封装类对象：Object、Array、Boolean、Number、String
+- 数据封装类：Object、Array、Boolean、Number、String
 - 其他对象：Function、Arguments、Math、Date、RegExp、Error
-- ES6新增对象：Symbol、Map、Set、Promises、Proxy、Reflect
+- ES6新增：Symbol、Map、Set、Promise、Proxy、Reflect
 
 **说几条写JavaScript的基本规范？**
 
-- 代码缩进，建议使用“四个空格”缩进
-- 代码段使用花括号{}包裹
-- 语句结束使用分号;
-- 变量和函数在使用前进行声明
-- 以大写字母开头命名构造函数，全大写命名常量
-- 规范定义JSON对象，补全双引号
-- 用{}和[]声明对象和数组
+- 四空格缩进
+- 使用{}包裹
+- 分号;结束
+- 使用前进行声明
+- 构造函数大写字母开头，常量全大写
+- JSON补全双引号
+- 用{}和[]声明
 
 **如何编写高性能的JavaScript？**
 
-* 遵循严格模式："use strict";
-* 将js脚本放在页面底部，加快渲染页面
-* 将js脚本将脚本成组打包，减少请求
-* 使用非阻塞方式下载js脚本
-* 尽量使用局部变量来保存全局变量
-* 尽量减少使用闭包
-* 使用 window 对象属性方法时，省略 window
-* 尽量减少对象成员嵌套
-* 缓存 DOM 节点的访问
-* 通过避免使用 eval() 和 Function() 构造器
-* 给 setTimeout() 和 setInterval() 传递函数而不是字符串作为参数
-* 尽量使用直接量创建对象和数组
-* 最小化重绘(repaint)和回流(reflow)
+* "use strict";
+* js置底
+* js打包
+* 非阻塞js
+* 使用局部变量
+* 减少闭包
+* window属性省略window
+* 减少对象成员嵌套
+* 缓存DOM节点
+* 避免eval()Function()
+* setTimeout()setInterval()传递函数
+* 直接量创建对象和数组
+* 最小化repaint和reflow
 
 
 **描述浏览器的渲染过程，DOM树和渲染树的区别？**
 
 - 浏览器的渲染过程：
-  - 解析HTML构建 DOM(DOM树)，并行请求 css/image/js
-  - CSS 文件下载完成，开始构建 CSSOM(CSS树)
-  - CSSOM 构建结束后，和 DOM 一起生成 Render Tree(渲染树)
-  - 布局(Layout)：计算出每个节点在屏幕中的位置
-  - 显示(Painting)：通过显卡把页面画到屏幕上
+  - 解析HTML构建DOM树，并行请求css/image/js构建CSS树，生成Render Tree，布局(Layout)，显示(Painting)
   
 - DOM树 和 渲染树 的区别：
-  - DOM树与HTML标签一一对应，包括head和隐藏元素
-  - 渲染树不包括head和隐藏元素，大段文本的每一个行都是独立节点，每一个节点都有对应的css属性
+  - DOMtree包括head和隐藏元素
+  - render tree不包括head和隐藏元素
 
 **重绘和回流（重排）的区别和关系？**
 
-- 重绘：当渲染树中的元素外观（如：颜色）发生改变，不影响布局时，产生重绘
-- 回流：当渲染树中的元素的布局（如：尺寸、位置、隐藏/状态状态）发生改变时，产生重绘回流
-- 注意：JS获取Layout属性值（如：offsetLeft、scrollTop、getComputedStyle等）也会引起回流。因为浏览器需要通过回流计算最新值
-- 回流必将引起重绘，而重绘不一定会引起回流
+- 重绘：外观（如：颜色）改变
+- 回流：布局（如：尺寸、位置、隐藏/状态状态）改变,offsetLeft、scrollTop、getComputedStyle等
+- 回流引起重绘，重绘不一定回流
 
 
 **如何最小化重绘(repaint)和回流(reflow)？**
 
-- 需要要对元素进行复杂的操作时，可以先隐藏(display:"none")，操作完成后再显示
-- 需要创建多个DOM节点时，使用DocumentFragment创建完后一次性的加入document
-- 缓存Layout属性值，如：var left = elem.offsetLeft; 这样，多次使用 left 只产生一次回流
-- 尽量避免用table布局（table元素一旦触发回流就会导致table里所有的其它元素回流）
-- 避免使用css表达式(expression)，因为每次调用都会重新计算值（包括加载页面）
-- 尽量使用 css 属性简写，如：用 border 代替 border-width, border-style, border-color
-- 批量修改元素样式：elem.className 和 elem.style.cssText 代替 elem.style.xxx
+- display:none操作完再显示
+- DocumentFragment创建后一次性加入
+- 缓存elem.offsetLeft
+- 避免table布局
+- 避免css expression
+- css简写如border代替border-width, border-style, border-color
+- className 和 style.cssText 代替 style.xxx
 
 **script 的位置是否会影响首屏显示时间？**
 
-- 在解析 HTML 生成 DOM 过程中，js 文件的下载是并行的，不需要 DOM 处理到 script 节点。因此，script的位置不影响首屏显示的开始时间。
-- 浏览器解析 HTML 是自上而下的线性过程，script作为 HTML 的一部分同样遵循这个原则
-- 因此，script 会延迟 DomContentLoad，只显示其上部分首屏内容，从而影响首屏显示的完成时间
+- 不影响开始影响完成
 
 **解释JavaScript中的作用域与变量声明提升？**
 
 - JavaScript作用域：
-  - 在Java、C等语言中，作用域为for语句、if语句或{}内的一块区域，称为作用域；
-  - 而在 JavaScript 中，作用域为function(){}内的区域，称为函数作用域。
+  - function(){}内的区域，称为函数作用域。
 
 - JavaScript变量声明提升：
-  -  在JavaScript中，函数声明与变量声明经常被JavaScript引擎隐式地提升到当前作用域的顶部。
-  -  声明语句中的赋值部分并不会被提升，只有名称被提升
-  -  函数声明的优先级高于变量，如果变量名跟函数名相同且未赋值，则函数声明会覆盖变量声明
-  -  如果函数有多个同名参数，那么最后一个参数（即使没有定义）会覆盖前面的同名参数
+  -  函数与变量提升到当前作用域顶部。赋值不提，名称提
+  -  函数声明会覆盖变量声明
 
-**介绍JavaScript的原型，原型链？有什么特点？**
-
-- 原型：
-  - JavaScript的所有对象中都包含了一个 [__proto__] 内部属性，这个属性所对应的就是该对象的原型
-  - JavaScript的函数对象，除了原型 [__proto__] 之外，还预置了 prototype 属性
-  - 当函数对象作为构造函数创建实例时，该 prototype 属性值将被作为实例对象的原型 [__proto__]。
-
-- 原型链：
-  -  当一个对象调用的属性/方法自身不存在时，就会去自己 [__proto__] 关联的前辈 prototype 对象上去找
-  -  如果没找到，就会去该 prototype 原型 [__proto__] 关联的前辈 prototype 去找。依次类推，直到找到属性/方法或 undefined 为止。从而形成了所谓的“原型链”
+**介绍JavaScript的原型，原型链？有什么特点？** 
+  - obj.__proto__ = Obj.prototype
+  - 直到找到属性/方法或 undefined 为止
   
-
-- 原型特点：
-  - JavaScript对象是通过引用来传递的，当修改原型时，与之相关的对象也会继承这一改变
   
 
 **JavaScript有几种类型的值？，你能画一下他们的内存图吗**
 
-- 原始数据类型（Undefined，Null，Boolean，Number、String）-- 栈
-- 引用数据类型（对象、数组和函数）-- 堆
-- 两种类型的区别是：存储位置不同：
-- 原始数据类型是直接存储在栈(stack)中的简单数据段，占据空间小、大小固定，属于被频繁使用数据；
-- 引用数据类型存储在堆(heap)中的对象，占据空间大、大小不固定，如果存储在栈中，将会影响程序运行的性能；
-- 引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。
-- 当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体。
+- 原始(Undefined，Null，Boolean，Number、String）-- 栈
+- 引用(对象、数组和函数）-- 堆 
 
 **JavaScript如何实现一个类，怎么实例化这个类？**
 
