@@ -95,12 +95,12 @@
 
 **JavaScript有几种类型的值？，你能画一下他们的内存图吗**
 
-- 原始(Undefined，Null，Boolean，Number、String）-- 栈
-- 引用(对象、数组和函数）-- 堆 
+- 原始(Undefined，Null，Boolean，Number、String）-- stack
+- 引用(对象、数组和函数）-- heap
 
 **JavaScript如何实现一个类，怎么实例化这个类？**
 
-- 构造函数法（this + prototype） -- 用 new 关键字 生成实例对象
+- function -- new
   - 缺点：用到了 this 和 prototype，编写复杂，可读性差
 
 ```javascript
@@ -114,7 +114,7 @@
    var iPhone7 = new Mobile("iPhone7", 1000);
    iPhone7.sell();
 ```
-- Object.create 法 -- 用 Object.create() 生成实例对象
+- Object.create
 - 缺点：不能实现私有属性和私有方法，实例对象之间也不能共享数据
 
 ```javascript
@@ -139,7 +139,7 @@
 　　};
 　}
 ```
-- 极简主义法（消除 this 和 prototype） -- 调用 createNew() 得到实例对象
+- 对象+createNew()
   - 优点：容易理解，结构清晰优雅，符合传统的"面向对象编程"的构造
    
 ```javascript
@@ -164,7 +164,7 @@
  cat.makeSound();
 ```
   
-- ES6 语法糖 class -- 用 new 关键字 生成实例对象      
+- ES6 语法糖 class -- new   
 
 ```javascript
      class Point {
@@ -182,8 +182,7 @@
 
 **Javascript如何实现继承？**
 
-- 构造函数绑定：使用 call 或 apply 方法，将父对象的构造函数绑定在子对象上
-
+- call 或 apply
 
 ```javascript   　
 function Cat(name,color){
@@ -192,14 +191,14 @@ function Cat(name,color){
  　this.color = color;
 }
 ```
-- 实例继承：将子对象的 prototype 指向父对象的一个实例     
+- prototype 指向父对象实例     
  
 ```javascript
 Cat.prototype = new Animal();
 Cat.prototype.constructor = Cat;
 ```
 
-- 拷贝继承：如果把父对象的所有属性和方法，拷贝进子对象
+- 拷贝
  
 ```javascript         　　
     function extend(Child, Parent) {
@@ -211,7 +210,8 @@ Cat.prototype.constructor = Cat;
   　　　c.uber = p;
   　 }
   ```
-- 原型继承：将子对象的 prototype 指向父对象的 prototype      
+
+- prototype 指向父对象prototype      
 
 ```javascript
     function extend(Child, Parent) {
@@ -222,7 +222,8 @@ Cat.prototype.constructor = Cat;
       　Child.uber = Parent.prototype;
     }
   ```
-- ES6 语法糖 extends：class ColorPoint extends Point {}
+
+- extends
 
 ```javascript
     class ColorPoint extends Point {
@@ -238,31 +239,24 @@ Cat.prototype.constructor = Cat;
 
 **Javascript作用链域?**
 
-- 全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节
-- 如果当前作用域没有找到属性或方法，会向上层作用域查找，直至全局函数，这种形式就是作用域链
+- 当前作用域没有找到，向上层作用域查找，直至全局函数
 
 **谈谈this对象的理解**
 
-- this 总是指向函数的直接调用者
-- 如果有 new 关键字，this 指向 new 出来的实例对象
-- 在事件中，this指向触发这个事件的对象
-- IE下 attachEvent 中的this总是指向全局对象Window
-
-**eval是做什么的？**
+- this指向函数的直接调用
+- new里面this指向new的实例
+- 事件里面this指向触发对象
+- attachEvent中this指向window
 
 **eval的功能是把对应的字符串解析成JS代码并运行**
 
-- 应该避免使用eval，不安全，非常耗性能（先解析成js语句，再执行）
-- 由JSON字符串转换为JSON对象的时候可以用 eval('('+ str +')');
+- 避免eval不安全耗性能
+- eval('('+ str +')');
 
 **什么是 Window 对象? 什么是 Document 对象?**
 
-- Window 对象表示当前浏览器的窗口，是JavaScript的顶级对象。
-- 我们创建的所有对象、函数、变量都是 Window 对象的成员。
-- Window 对象的方法和属性是在全局范围内有效的。
-- Document 对象是 HTML 文档的根节点与所有其他节点（元素节点，文本节点，属性节点, 注释节点）
--  Document 对象使我们可以通过脚本对 HTML 页面中的所有元素进行访问
--  Document 对象是 Window 对象的一部分，可通过 window.document 属性对其进行访问
+- Window是顶级对象。所有对象、函数、变量都是 Window成员。
+- Document是Window一部分，window.document
 
 **介绍 DOM 的发展**
 
@@ -286,9 +280,9 @@ Cat.prototype.constructor = Cat;
     - `eventUtil.addListener(input, "textInput", func);`
     -  `eventUtil` 是自定义对象，`textInput` 是DOM3级事件
 
-**事件的三个阶段**
+**事件三阶段**
 
-- 捕获、目标、冒泡
+- 捕获目标冒泡
 
 **介绍事件“捕获”和“冒泡”执行顺序和事件的执行次数？**
 
@@ -313,8 +307,8 @@ Cat.prototype.constructor = Cat;
 
 * 事件委托是指将事件绑定目标元素的到父元素上，利用冒泡机制触发该事件
   * 优点：
-    - 可以减少事件注册，节省大量内存占用
-    - 可以将事件应用于动态添加的子元素上
+    - 减少注册，节省内存
+    - 事件动态添加的子元素上
   * 缺点：
     使用不当会造成事件在不应该触发时触发
   * 示例：
@@ -330,21 +324,21 @@ ulEl.addEventListener('click', function(e){
 
 **IE与火狐的事件机制有什么区别？ 如何阻止冒泡？**
 
-* IE只事件冒泡，不支持事件捕获；火狐同时支持件冒泡和事件捕获
+* IE只冒泡；火狐冒泡和捕获
 
 **IE的事件处理和W3C的事件处理有哪些区别？**
 
 * 绑定事件
-  - W3C: targetEl.addEventListener('click', handler, false);
-  - IE: targetEl.attachEvent('onclick', handler);
+  - W3C: addEventListener('click', handler, false);
+  - IE: attachEvent('onclick', handler);
 
 * 删除事件
-  - W3C: targetEl.removeEventListener('click', handler, false);
-  - IE: targetEl.detachEvent(event, handler);
+  - W3C: removeEventListener('click', handler, false);
+  - IE: detachEvent(event, handler);
 
 * 事件对象
   - W3C: var e = arguments.callee.caller.arguments[0]
-  - IE: window.event
+  - IE: var e = window.event
 
 * 事件目标
   - W3C: e.target

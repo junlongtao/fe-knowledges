@@ -1,11 +1,5 @@
-# FE-Knowledges
-
-> 前端知识点速记
-
-
-目录
----
-
+# FE Knowledges Shorthand
+ 
 - [HTML](HTML.md)
 - [CSS](CSS.md)
 - [JavaScript](JavaScript.md)
