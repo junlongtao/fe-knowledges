@@ -286,7 +286,7 @@ Cat.prototype.constructor = Cat;
 
 **介绍事件“捕获”和“冒泡”执行顺序和事件的执行次数？**
 
-- 按照W3C标准的事件：首是进入捕获阶段，直到达到目标元素，再进入冒泡阶段
+- 按照W3C标准的事件：捕获，目标，冒泡
 - 事件执行次数（DOM2-addEventListener）：元素上绑定事件的个数
   - 注意1：前提是事件被确实触发
   - 注意2：事件绑定几次就算几个事件，即使类型和功能完全一样也不会“覆盖”
@@ -305,12 +305,12 @@ Cat.prototype.constructor = Cat;
 
 **事件的代理/委托**
 
-* 事件委托是指将事件绑定目标元素的到父元素上，利用冒泡机制触发该事件
+* 事件绑定父元素，冒泡触发
   * 优点：
     - 减少注册，节省内存
     - 事件动态添加的子元素上
   * 缺点：
-    使用不当会造成事件在不应该触发时触发
+    使用不当误触
   * 示例：
       
 ```
@@ -324,7 +324,7 @@ ulEl.addEventListener('click', function(e){
 
 **IE与火狐的事件机制有什么区别？ 如何阻止冒泡？**
 
-* IE只冒泡；火狐冒泡和捕获
+* IE冒泡；火狐捕获冒泡
 
 **IE的事件处理和W3C的事件处理有哪些区别？**
 
@@ -419,19 +419,10 @@ window.onresize = function(){
 * elem.offsetTop：返回元素相对于其定位父级顶部的距离
 * elem.getBoundingClientRect()：返回一个DOMRect对象，包含一组描述边框的只读属性，单位像素
 
-**分析 ['1', '2', '3'].map(parseInt) 答案是多少？**
+** ['1', '2', '3'].map(parseInt)？**
 
-- 答案:[1, NaN, NaN]
-* parseInt(string, radix) 第2个参数 radix 表示进制。省略 radix 或 radix = 0，则数字将以十进制解析
-* map 每次为 parseInt 传3个参数(elem, index, array)，其中 index 为数组索引
-* 因此，map 遍历 ["1", "2", "3"]，相应 parseInt 接收参数如下
-
-```
-parseInt('1', 0);  // 1
-parseInt('2', 1);  // NaN
-parseInt('3', 2);  // NaN
-```
--  所以，parseInt 参数 radix 不合法，导致返回值为 NaN
+- [1, NaN, NaN]
+* parseInt(string, radix) 第2个参数 radix 表示进制。radix =0||undefined，十进制解析
 
 **new 操作符具体干了什么？**
 

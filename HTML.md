@@ -32,52 +32,43 @@
 
 **行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？**
 
-- 行内元素有：`a b span img input select strong`（强调的语气）
-- 块级元素有：`div ul ol li dl dt dd h1 h2 h3 h4…p`
-- 常见的空元素:` <br> <hr> <img> <input> <link> <meta>`
+- 行内：`a b span img input select strong`
+- 块级：`div ul ol li dl dt dd h1 h2 h3 h4…p`
+- 空:` <br> <hr> <img> <input> <link> <meta>`
 
-**页面导入样式时，使用link和@import有什么区别？**
+**导入样式,link和@import区别？**
 
-- `link`属于`XHTML`标签，除了加载`CSS`外，还能用于定义`RSS`,定义`rel`连接属性等作用；而`@import`是`CSS`提供的，只能用于加载`CSS`
-- 页面被加载的时，`link`会同时被加载，而`@import`引用的`CSS`会等到页面被加载完再加载
-- `import`是`CSS2.1` 提出的，只在`IE5`以上才能被识别，而`link`是`XHTML`标签，无兼容问题
+- `link`能加载`CSS`，定义`RSS`,`rel`连接；`@import`只能加载`CSS`
+- 页面加载link`同时加载，`@import`等页面加载完再加载
+- `import`有兼容问题
 
 **介绍一下你对浏览器内核的理解？**
 
-- 主要分成两部分：渲染引擎(`layout engineer`或`Rendering Engine`)和`JS`引擎
-
-- 渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核
-- JS引擎则：解析和执行javascript来实现网页的动态效果
-- 最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎
+- 渲染引擎(`layout engineer`或`Rendering Engine`)和`JS`引擎
 
 **常见的浏览器内核有哪些？**
 
-- `Trident`内核：`IE,MaxThon,TT,The World,360`,搜狗浏览器等。[又称MSHTML]
-- `Gecko`内核：`Netscape6`及以上版本，`FF,MozillaSuite/SeaMonkey`等
-- `Presto`内核：`Opera7`及以上。      [`Opera`内核原为：Presto，现为：`Blink`;]
-- `Webkit`内核：`Safari,Chrome`等。   [ `Chrome`的`Blink`（`WebKit`的分支）]
+- Trident：IE,360,搜狗
+- Gecko：Firefox
+- Presto,Blink：Opera
+- Webkit：Safari,Chrome
 
-**html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？**
-
-- HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加
-  - 绘画 canvas
-  - 用于媒介回放的 video 和 audio 元素
-  - 本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失
-  - sessionStorage 的数据在浏览器关闭后自动删除
-  - 语意化更好的内容元素，比如 article、footer、header、nav、section
-  - 表单控件，calendar、date、time、email、url、search
-  - 新的技术webworker, websocket, Geolocation
+**html5有新特性
+  - canvas
+  - video audio 
+  - localStorage
+  - sessionStorage
+  - article、footer、header、nav、section
+  - calendar、date、time、email、url、search
+  - webworker, websocket, geolocation
   
--  移除的元素：
-  - 纯表现的元素：basefont，big，center，font, s，strike，tt，u
-  - 对可用性产生负面影响的元素：frame，frameset，noframes
+-  移除：
+  - basefont，big，center，font, s，strike，tt，u
+  - frame，frameset，noframes
   
 - 支持HTML5新标签：
-  - IE8/IE7/IE6支持通过document.createElement方法产生的标签
-  - 可以利用这一特性让这些浏览器支持HTML5新标签
-  - 浏览器支持新标签后，还需要添加标签默认的样式
-  
-- 当然也可以直接使用成熟的框架、比如html5shim
+  - document.createElement,添加标签默认样式
+  - html5.js
 
 ```
 <!--[if lt IE 9]>
@@ -85,13 +76,14 @@
 /svn/trunk/html5.js"</script><![endif]-->
 ```
 
-- 如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素
 
-**HTML5的离线储存怎么使用，工作原理能不能解释一下？**
+**HTML5的离线储存**
 
 - 在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件
 
-- 原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示
+- 原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，
+通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。
+之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示
 
 - 如何使用：
   - 页面头部像下面一样加入一个manifest的属性；
@@ -115,19 +107,16 @@ CACHE MANIFEST
 
 - 离线的情况下，浏览器就直接使用离线存储的资源。
 
-**请描述一下 cookies，sessionStorage 和 localStorage 的区别？**
+**cookies sessionStorage localStorage 的区别**
 
 - cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）
-- cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递
-- `sessionStorage`和`localStorage`不会自动把数据发给服务器，仅在本地保存
-- 存储大小：
-  - `cookie`数据大小不能超过4k
-  - `sessionStorage`和`localStorage`虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大
-  
-- 有期时间：
-  - `localStorage` 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
-  - `sessionStorage`  数据在当前浏览器窗口关闭后自动删除
-  - `cookie`  设置的`cookie`过期时间之前一直有效，即使窗口或浏览器关闭
+- cookie同源的http请求中携带
+- `sessionStorage`和`localStorage`不发给服务器 
+- `cookie`<=4k，`sessionStorage`和`localStorage`<=5M
+
+  - `localStorage` 浏览器关闭后不丢
+  - `sessionStorage`  浏览器关闭后自动删除
+  - `cookie`  过期时间
   
 **iframe有那些缺点？**
 
