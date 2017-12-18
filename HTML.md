@@ -33,7 +33,7 @@
 **行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？**
 
 - 行内：`a b span img input select strong`
-- 块级：`div ul ol li dl dt dd h1 h2 h3 h4…p`
+- 块级：`div ul(无序) ol(有序) li dl dt dd h1 h2 h3 h4…p`
 - 空:` <br> <hr> <img> <input> <link> <meta>`
 
 **导入样式,link和@import区别？**
@@ -46,10 +46,10 @@
 
 - 渲染引擎(`layout engineer`或`Rendering Engine`)和`JS`引擎
 
-**常见的浏览器内核有哪些？**
+**浏览器内核**
 
-- Trident：IE,360,搜狗
 - Gecko：Firefox
+- Trident：IE,360,搜狗
 - Presto,Blink：Opera
 - Webkit：Safari,Chrome
 
@@ -109,41 +109,38 @@ CACHE MANIFEST
 
 **cookies sessionStorage localStorage 的区别**
 
-- cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）
 - cookie同源的http请求中携带
 - `sessionStorage`和`localStorage`不发给服务器 
 - `cookie`<=4k，`sessionStorage`和`localStorage`<=5M
-
-  - `localStorage` 浏览器关闭后不丢
-  - `sessionStorage`  浏览器关闭后自动删除
-  - `cookie`  过期时间
+- `localStorage` 浏览器关闭后不丢
+- `sessionStorage`  浏览器关闭后自动删除
+- `cookie`  过期时间后删除
   
 **iframe有那些缺点？**
 
-- iframe会阻塞主页面的Onload事件
-- 搜索引擎的检索程序无法解读这种页面，不利于SEO
-- iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载
-- 使用`iframe`之前需要考虑这两个缺点。如果需要使用`iframe`，最好是通过`javascript`动态给`iframe`添加`src`属性值，这样可以绕开以上两个问题
+- 阻塞主页面onload
+- 不利于SEO
+- 影响页面并行加载
+- js动态添加`src`属性可绕开以上问题
 
-**Label的作用是什么？是怎么用的？**
+**Label的作用**
 
-- label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件
+- 选择该标签浏览器自动聚焦标签相关的表单控件
 
 **HTML5的form如何关闭自动完成功能？**
 
-- 给不想要提示的 form 或某个 input 设置为 autocomplete=off。
+- autocomplete=off
 
-**如何实现浏览器内多个标签页之间的通信? (阿里)**
+**标签页之间通信(阿里)**
 
-- WebSocket、SharedWorker
-- 也可以调用localstorge、cookies等本地存储方式
+- WebSocket SharedWorker localstorge cookies
+ 
+**webSocket兼容低浏览器(阿里)**
 
-**webSocket如何兼容低浏览器？(阿里)**
-
-- Adobe Flash Socket 、
-- ActiveX HTMLFile (IE) 、
-- 基于 multipart 编码发送 XHR 、
-- 基于长轮询的 XHR
+- Adobe Flash Socket 
+- ActiveX HTMLFile (IE) 
+- multipart XHR 
+- 长轮询XHR
 
 **页面可见性（Page Visibility API） 可以有哪些用途？**
 

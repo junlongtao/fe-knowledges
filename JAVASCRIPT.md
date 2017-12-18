@@ -1118,30 +1118,57 @@ alert(GetBytes("你好,as"));
     
 **Array.splice() 与 Array.splice() 的区别？**
 
-* slice -- “读取”数组指定的元素，不会对原数组进行修改
-  - 语法：arr.slice(start, end)
-  - start 指定选取开始位置（含）
-  - end 指定选取结束位置（不含）
-  
- * splice 
-   - “操作”数组指定的元素，会修改原数组，返回被删除的元素
-   - 语法：arr.splice(index, count, [insert Elements])
-   - index 是操作的起始位置
-   - count = 0 插入元素，count > 0 删除元素
-   - [insert Elements] 向数组新插入的元素
+- arr.slice(start, end) 
+- arr.splice(index, count, [insert Elements]) 
    
-**JavaScript 对象生命周期的理解？**
+**JavaScript 对象生命周期**
 
-* 当创建一个对象时，JavaScript 会自动为该对象分配适当的内存
-* 垃圾回收器定期扫描对象，并计算引用了该对象的其他对象的数量
-* 如果被引用数量为 0，或惟一引用是循环的，那么该对象的内存即可回收
+* 分配适当内存
+* 垃圾回收器定期扫描计算引用数量
+* 引用0或惟一引用是循环即可回收
 
 **哪些操作会造成内存泄漏？**
 
--  JavaScript 内存泄露指对象在不需要使用它时仍然存在，导致占用的内存不能使用或回收
+- 非var全局变量
+- 闭包函数
+- 循环引用
+- console.log
+- 移除存在事件的DOM
 
-- 未使用 var 声明的全局变量
-- 闭包函数(Closures)
-- 循环引用(两个对象相互引用)
-- 控制台日志(console.log)
-- 移除存在绑定事件的DOM元素(IE)
+**setTimeout模拟setInterval,实现mySetInterval**
+
+```
+function mySetInterval(method, ms){
+  method.id = setTimeout(function(){
+    method() 
+    mySetInterval(method, ms)
+  }, ms)
+} 
+function method(){
+  console.log('aaa')
+}
+mySetInterval(method, 1000)
+setTimeout('clearTimeout(method.id)', 10000)
+
+```
+
+**js实现二叉树bfs**
+```
+var testTree = {
+  value: 'A',
+  childNodes: [{
+    value: 'B',
+    childNodes:[{
+      value: 'D'
+    }]
+  }, {
+    value: 'C',
+    childNodes:[{
+      value: 'E',
+      childNodes:
+    }]
+  }]
+}
+```
+
+
