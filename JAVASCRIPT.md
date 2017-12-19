@@ -949,14 +949,10 @@ Object.prototype.clone = function(){
     
 ```
 
-**说说严格模式的限制**
+**严格模式**
 
-  - 严格模式主要有以下限制：
-
-  - 变量必须声明后再使用
-
-  - 函数的参数不能有同名属性，否则报错
-
+  - 变量声明后使用
+  - 函数参数不能同名
   - 不能使用with语句
 
   - 不能对只读属性赋值，否则报错
@@ -983,48 +979,27 @@ Object.prototype.clone = function(){
 
   - 增加了保留字（比如protected、static和interface）
   
-**如何删除一个cookie**
 
-- 将时间设为当前时间往前一点
-
-```
-var date = new Date();
-
-date.setDate(date.getDate() - 1);//真正的删除
-```
-setDate()方法用于设置一个月的某一天
-
-- expires的设置
-
+**删除cookie**
 ```
   document.cookie = 'user='+ encodeURIComponent('name')  + ';expires = ' + new Date(0)
 ```
 
 
-**编写一个方法 求一个字符串的字节长度**
-
-- 假设：一个英文字符占用一个字节，一个中文字符占用两个字节    
-
+**求字符串字节长度**
+ 
 ```
-function GetBytes(str){
-
-        var len = str.length;
-
-        var bytes = len;
-
-        for(var i=0; i<len; i++){
-
-            if (str.charCodeAt(i) > 255) bytes++;
-
-        }
-
-        return bytes;
-
+function getBytes(str){ 
+    var bytes = str.length;
+    for(var i=0; i<str.length; i++){
+        if (str.charCodeAt(i) > 255) bytes++;
     }
-
-alert(GetBytes("你好,as"));
+    return bytes;
+}
+getBytes("你好,as")
 
 ```
+
 
 **事件代理**
 - DOM元素事件冒泡。提高性能
