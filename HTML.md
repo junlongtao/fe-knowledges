@@ -16,7 +16,7 @@
 `DOCTYPE`不存在或格式不正确会导致文档以兼容模式呈现
 - 标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作
 
-**HTML5只写 <!DOCTYPE HTML>**
+**H5只写 <!DOCTYPE HTML>**
 
 - 不基于 SGML，不引用DTD
 
@@ -34,26 +34,25 @@
 
 **浏览器内核**
 
-- 渲染引擎(`layout engineer`或`Rendering Engine`)和`JS`引擎 
+- `Layout Engine`+`Rendering Engine`+`JS Engine` 
 - Gecko：Firefox
 - Trident：IE,360,搜狗
 - Presto,Blink：Opera
 - Webkit：Safari,Chrome
 
-**html5新特性
+**h5新特性**
   - canvas
   - video audio 
-  - localStorage
-  - sessionStorage
+  - localStorage sessionStorage
   - article、footer、header、nav、section
   - calendar、date、time、email、url、search
   - webworker, websocket, geolocation
   
-**html5移除**
+**h5移除**
   - basefont，big，center，font, s，strike，tt，u
   - frame，frameset，noframes
   
-**支持HTML5新标签**
+**支持H5新标签**
   - document.createElement,添加标签默认样式
   - html5.js
 
@@ -64,19 +63,9 @@
 ```
 
 
-**H5离线储存**
-
-- 在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件
-
-- 原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，
-通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。
-之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示
-
-- 如何使用：
-  - 页面头部像下面一样加入一个manifest的属性；
-  - 在cache.manifest文件的编写离线存储的资源
-  - 在离线状态时，操作window.applicationCache进行需求实现
+**H5离线储存** 
 ```
+//cache.manifest
 CACHE MANIFEST
     #v0.11
     CACHE:
@@ -126,10 +115,9 @@ CACHE MANIFEST
 - multipart XHR 
 - 长轮询XHR
 
-**页面可见性（Page Visibility API） 可以有哪些用途？**
+**Page Visibility API**
 
-- 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等;
-- 在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放
+- visibilityState可检测页面可见，打开时间, 暂停音乐
 
 **圆形可点击区域**
 - svg
@@ -145,10 +133,10 @@ CACHE MANIFEST
 
 - 防暴力破解、刷票、灌水
 
-**title与h1的区别、b与strong的区别、i与em的区别？**
+**title与h1、b与strong、i与em**
 
-- `title`无明确意义 H1有明确层次
-- `strong`标重点会重读，<B>只强调
+- `title`无明确意义，h1有明确层次
+- `strong`标重点会重读，`b`只强调
 - i斜体，em强调
 
 
