@@ -931,53 +931,35 @@ var test1 = createObject('trigkit4',22,'programmer');//第一个实例var test2 
 - 缺点
   - 现在网站的JS都会进行压缩，一些文件用了严格模式，而另一些没有。这时这些本来是严格模式的文件，被 merge后，这个串就到了文件的中间，不仅没有指示严格模式，反而在压缩后浪费了字节
   
-**实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Number、String、Object、Array、Boolean）进行值复制**
-
+**函数clone进行值复制**
 ```
 Object.prototype.clone = function(){
-
-            var o = this.constructor === Array ? [] : {};
-
-            for(var e in this){
-
-                    o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
-
-            }
-
-            return o;
+    var o = this.constructor === Array ? [] : {};
+    for(var e in this){
+        o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
     }
+    return o;
+}
     
 ```
 
-**严格模式**
 
+**严格模式**
   - 变量声明后使用
   - 函数参数不能同名
-  - 不能使用with语句
-
-  - 不能对只读属性赋值，否则报错
-
-  - 不能使用前缀0表示八进制数，否则报错
-
-  - 不能删除不可删除的属性，否则报错
-
-  - 不能删除变量delete prop，会报错，只能删除属性delete global[prop]
-
+  - no with 
+  - 只读属性赋值报错 
+  - 前缀0表示八进制报错
+  - 删除不可删除的属性报错
+  - delete prop报错
   - eval不会在它的外层作用域引入变量
-
   - eval和arguments不能被重新赋值
-
   - arguments不会自动反映函数参数的变化
-
   - 不能使用arguments.callee
-
   - 不能使用arguments.caller
-
   - 禁止this指向全局对象
-
   - 不能使用fn.caller和fn.arguments获取函数调用的堆栈
-
-  - 增加了保留字（比如protected、static和interface）
+  - 增加保留字（protected static interface）
   
 
 **删除cookie**
