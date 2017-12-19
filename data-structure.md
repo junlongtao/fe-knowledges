@@ -1,20 +1,16 @@
-**栈和队列的区别?**
+**栈和队列**
 
-- 栈的插入和删除操作都是在一端进行的，而队列的操作却是在两端进行的。
-
-- 队列先进先出，栈先进后出。
-
-- 栈只允许在表尾一端进行插入和删除，而队列只允许在表尾一端进行插入，在表头一端进行删除
+- 队列先进先出，栈先进后出
 
 **栈和堆的区别？**
 
-- 栈区（stack）—   由编译器自动分配释放   ，存放函数的参数值，局部变量的值等。
+- 栈区（stack）编译器自动分配释放
 
-- 堆区（heap）   —   一般由程序员分配释放，   若程序员不释放，程序结束时可能由OS回收。
+- 堆区（heap）程序员分配释放,OS回收。
 
-- 堆（数据结构）：堆可以被看成是一棵树，如：堆排序；
+- 堆：树
 
-- 栈（数据结构）：一种先进后出的数据结构
+- 栈：先进后出
 
 **快速 排序的思想并实现一个快排？**
 
@@ -56,3 +52,96 @@
 
     </script>
 ```
+
+**二叉树bfs,dfs**
+
+*bfs=队列，dfs=栈*
+```
+<!-- 
+            A
+           / \
+         B     C
+        / \   / \     
+       D   E  F  H    
+ -->     
+         
+var testTree = {
+    value: 'A',
+    childNodes:[{
+        value: 'B',
+        childNodes:[{
+            value: 'D'
+        },{
+            value: 'E'
+        }]
+    },{
+        value: 'C',
+        childNodes:[{
+            value: 'F'
+        },{
+            value: 'H'
+        }]
+    }] 
+}
+function bfs(root){
+    var queue = []
+    queue.push(root)
+    while(queue.length>0){
+        var node = queue.shift()
+        console.log(node.value)
+
+        //左右子树入队
+        node.childNodes && node.childNodes.map(function(item, key){
+            queue.push(item)
+        })
+    }
+}
+bfs(testTree)//A B C D E F H
+
+function dfs(root){
+    var stack = []
+    stack.push(root)
+    while(stack.length>0){
+        var node = stack.pop()
+        console.log(node.value)
+
+        //右子树入栈，左子树入栈
+        if(node.childNodes && node.childNodes[1]){
+            stack.push(node.childNodes[1])
+        }
+        if(node.childNodes && node.childNodes[0]){
+            stack.push(node.childNodes[0]) 
+        }
+    }
+}
+dfs(testTree)//A B D E C F H
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
