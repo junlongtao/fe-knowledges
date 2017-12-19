@@ -4,10 +4,7 @@
 
 **语义化**
 
-- HTML标签的语义化是指：通过使用包含语义的标签（如h1-h6）恰当地表示文档结构
-- css命名的语义化是指：为html标签添加有意义的class
-
-- 为什么需要语义化：
+- 语义标签,有意义的class 
   - 去掉样式后页面呈现清晰的结构
   - 盲人使用读屏器更好地阅读
   - 搜索引擎更好地理解页面，有利于收录
@@ -53,7 +50,7 @@
 - Presto,Blink：Opera
 - Webkit：Safari,Chrome
 
-**html5有新特性
+**html5新特性
   - canvas
   - video audio 
   - localStorage
@@ -116,18 +113,18 @@ CACHE MANIFEST
 - `sessionStorage`  浏览器关闭后自动删除
 - `cookie`  过期时间后删除
   
-**iframe有那些缺点？**
+**iframe缺点**
 
 - 阻塞主页面onload
 - 不利于SEO
 - 影响页面并行加载
 - js动态添加`src`属性可绕开以上问题
 
-**Label的作用**
+**Label作用**
 
 - 选择该标签浏览器自动聚焦标签相关的表单控件
 
-**HTML5的form如何关闭自动完成功能？**
+**HTML5关闭自动完成**
 
 - autocomplete=off
 
@@ -153,7 +150,7 @@ CACHE MANIFEST
 - border-radius
 - 纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
 
-**实现不使用 border 画出1px高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果**
+**no border 1px line**
 
 ```
 <div style="height:1px;overflow:hidden;background:red"></div>
@@ -170,133 +167,6 @@ CACHE MANIFEST
 - `strong`是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<B>是展示强调内容
 - i内容展示为斜体，em表示强调的文本
 
-**页面导入样式时，使用 link 和 @import 有什么区别？**
-
-* link 属于HTML标签，除了加载CSS外，还能用于定 RSS等；@import 只能用于加载CSS
-* 页面加载的时，link 会同时被加载，而 @import 引用的 CSS 会等到页面被加载完再加载
-* @import 只在 IE5 以上才能被识别，而 link 是HTML标签，无兼容问题
-
-**介绍一下你对浏览器内核的理解？**
-
-* 浏览器内核主要分为两部分：渲染引擎(layout engineer 或 Rendering Engine) 和 JS引擎
-* 渲染引擎负责取得网页的内容进行布局计和样式渲染，然后会输出至显示器或打印机
-* JS引擎则负责解析和执行JS脚本来实现网页的动态效果和用户交互
-* 最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎
-
-**常见的浏览器内核有哪些？**
-
-* Blink内核：新版 Chrome、新版 Opera
-* Webkit内核：Safari、原Chrome
-* Gecko内核：FireFox、Netscape6及以上版本
-* Trident内核（又称MSHTML内核）：IE、国产浏览器
-* Presto内核：原Opera7及以上
-
-**HTML5有哪些新特性？**
-
-* 新增选择器 document.querySelector、document.querySelectorAll
-* 拖拽释放(Drag and drop) API
-* 媒体播放的 video 和 audio
-* 本地存储 localStorage 和 sessionStorage
-* 离线应用 manifest
-* 桌面通知 Notifications
-* 语意化标签 article、footer、header、nav、section
-* 增强表单控件 calendar、date、time、email、url、search
-* 地理位置 Geolocation
-* 多任务 webworker
-* 全双工通信协议 websocket
-* 历史管理 history
-* 跨域资源共享(CORS) Access-Control-Allow-Origin
-* 页面可见性改变事件 visibilitychange
-* 跨窗口通信 PostMessage
-* Form Data 对象
-* 绘画 canvas
-
-**HTML5移除了那些元素？**
-
-* 纯表现的元素：basefont、big、center、font、s、strike、tt、u
-* 对可用性产生负面影响的元素：frame、frameset、noframes
-
-**如何处理HTML5新标签的浏览器兼容问题？**
-
-* 通过 document.createElement 创建新标签
-* 使用垫片 html5shiv.js
-
-**如何区分 HTML 和 HTML5？**
-
-- DOCTYPE声明、新增的结构元素、功能元素
-
-**HTML5的离线储存工作原理能不能解释一下，怎么使用？**
-
-* HTML5的离线储存原理：
-  - 用户在线时，保存更新用户机器上的缓存文件；当用户离线时，可以正常访离线储存问站点或应用内容
-  
-* HTML5的离线储存使用：
-
-    - 在文档的 html 标签设置 manifest 属性，如 manifest="/offline.appcache"
-    - 在项目中新建 manifest 文件，manifest 文件的命名建议：xxx.appcache
-    - 在 web 服务器配置正确的 MIME-type，即 text/cache-manifest
-    
-**浏览器是怎么对HTML5的离线储存资源进行管理和加载的？**
 
 
-* 在线的情况下，浏览器发现 html 标签有 manifest 属性，它会请求 manifest 文件
-* 如果是第一次访问app，那么浏览器就会根据 manifest 文件的内容下载相应的资源并且进行离线存储
-* 如果已经访问过app且资源已经离线存储了，浏览器会对比新的 manifest 文件与旧的 manifest 文件，如果文件没有发生改变，就不做任何操作。如果文件改变了，那么就会重新下载文件中的资源并进行离线存储
-* 离线的情况下，浏览器就直接使用离线存储的资源。
-
-**iframe 有那些优点和缺点？**
-
-* 优点：
-     - 用来加载速度较慢的内容（如广告）
-     - 可以使脚本可以并行下载
-     - 可以实现跨子域通信
-     
-* 缺点：
-     - iframe 会阻塞主页面的 onload 事件
-     - 无法被一些搜索引擎索识别
-     - 会产生很多页面，不容易管理
-     
-**label 的作用是什么？怎么使用的？**
-
-* label标签来定义表单控件的关系：
-  - 当用户选择label标签时，浏览器会自动将焦点转到和label标签相关的表单控件上
-  
-* 使用方法1：
-  - `<label for="mobile">Number:</label>`
-  - `<input type="text" id="mobile"/>`
-  
-* 使用方法2：
-  - `<label>Date:<input type="text"/></label>`
-  
-**如何实现浏览器内多个标签页之间的通信？**
-
-* iframe + contentWindow
-* postMessage
-* SharedWorker(Web Worker API)
-* storage 事件(localStorge API)
-* WebSocket
-
-**webSocket 如何兼容低浏览器？**
-
-* Adobe Flash Socket
-* ActiveX HTMLFile (IE)
-* 基于 multipart 编码发送 XHR
-* 基于长轮询的 XHR
-
-**页面可见性（Page Visibility API） 可以有哪些用途？**
-
-* 在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放
-* 当用户浏览其他页面，暂停网站首页幻灯自动播放
-* 完成登陆后，无刷新自动同步其他页面的登录状态
-
-**title 与 h1 的区别、b 与 strong 的区别、i 与 em 的区别？**
-
-* title 表示是整个页面标题，h1 则表示层次明确的标题，对页面信息的抓取有很大的影响
-* strong 标明重点内容，有语气加强的含义，使用阅读设备阅读网络时，strong 会重读，而 b 
-
-**是展示强调内容**
-
-  * i 内容展示为斜体，em 表示强调的文本
-  * 自然样式标签：b, i, u, s, pre
-  * 语义样式标签：strong, em, ins, del, code
-  * 应该准确使用语义样式标签, 但不能滥用。如果不能确定时，首选使用自然样式标签
+ 
