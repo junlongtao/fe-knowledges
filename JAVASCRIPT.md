@@ -1026,55 +1026,45 @@ alert(GetBytes("你好,as"));
 
 ```
 
-**请解释什么是事件代理**
+**事件代理**
+- DOM元素事件冒泡。提高性能
 
-- 事件代理（Event Delegation），又称之为事件委托。是 JavaScript 中常用绑定事件的常用技巧。顾名思义，“事件代理”即是把原本需要绑定的事件委托给父元素，让父元素担当事件监听的职务。事件代理的原理是DOM元素的事件冒泡。使用事件代理的好处是可以提高性能
 
-**attribute和property的区别是什么？**
+**attribute和property区别**
+- attribute是dom元素属性
+- property是dom元素js属性
 
-- attribute是dom元素在文档中作为html标签拥有的属性；
-- property就是dom元素在js中作为对象拥有的属性。
 
-- 对于html的标准属性来说，attribute和property是同步的，是会自动更新的
-- 但是对于自定义的属性来说，他们是不同步的
-
-**页面编码和被请求的资源编码如果不一致如何处理？**
-
+**页面编码和资源编码不一致如何处理？**
  * 后端响应头设置 charset 
  * 前端页面`<meta>`设置 charset
+
  
 
-**把`<script>`放在`</body>`之前和之后有什么区别？浏览器会如何解析它们？**
-
- * 按照HTML标准，在`</body>`结束后出现`<script>`或任何元素的开始标签，都是解析错误
- * 虽然不符合HTML标准，但浏览器会自动容错，使实际效果与写在`</body>`之前没有区别
- * 浏览器的容错机制会忽略<script>之前的`</body>`，视作`<script>`仍在 body 体内。省略`</body>`和`</html>`闭合标签符合HTML标准，服务器可以利用这一标准尽可能少输出内容
- 
-**延迟加载JS的方式有哪些？**
-
-* 设置`<script>`属性 defer="defer" （脚本将在页面完成解析时执行）
-* 动态创建 script DOM：document.createElement('script');
+**延迟加载JS**
+* `<script defer="defer">`
+* document.createElement('script')
 * XmlHttpRequest 脚本注入
 * 延迟加载工具 LazyLoad
 
-**异步加载JS的方式有哪些？**
 
-* 设置`<script>`属性 async="async" （一旦脚本可用，则会异步执行）
-* 动态创建 script DOM：document.createElement('script');
+**异步加载JS**
+* `<script async="async">`
+* document.createElement('script')
 * XmlHttpRequest 脚本注入
 * 异步加载库 LABjs
 * 模块加载器 Sea.js
 
-**JavaScript 中，调用函数有哪几种方式？**
 
-* 方法调用模式          Foo.foo(arg1, arg2);
-* 函数调用模式          foo(arg1, arg2);
-* 构造器调用模式        (new Foo())(arg1, arg2);
-* call/applay调用模式   Foo.foo.call(that, arg1, arg2);
-* bind调用模式          Foo.foo.bind(that)(arg1, arg2)();
+**调用函数方式**
+* Foo.foo(arg1, arg2)
+* foo(arg1, arg2)
+* (new Foo())(arg1, arg2)
+* Foo.foo.call(that, arg1, arg2)
+* Foo.foo.bind(that)(arg1, arg2)()
 
 
-**简单实现 Function.bind 函数？**
+**Function.bind**
 
 ```javascript
   if (!Function.prototype.bind) {
@@ -1092,7 +1082,7 @@ alert(GetBytes("你好,as"));
   func.bind(that)(arg1, arg2);
 ```
 
-** 列举一下JavaScript数组和对象有哪些原生方法？**
+**数组和对象原生方法**
 
 * 数组：
     - arr.concat(arr1, arr2, arrn);
@@ -1101,7 +1091,7 @@ alert(GetBytes("你好,as"));
     - arr.pop();
     - arr.push(e1, e2, en);
     - arr.shift();
-    - unshift(e1, e2, en);
+    - arr.unshift(e1, e2, en);
     - arr.reverse();
     - arr.slice(start, end);            
     - arr.splice(index, count, e1, e2, en);  
@@ -1115,25 +1105,26 @@ alert(GetBytes("你好,as"));
     -  object.toString();                
     -  object.toLocaleString();          
     -  Class.prototype.isPropertyOf(object);  
-    
-**Array.splice() 与 Array.splice() 的区别？**
+  
 
+**Array.splice Array.slice**
 - arr.slice(start, end) 
 - arr.splice(index, count, [insert Elements]) 
    
+
 **JavaScript 对象生命周期**
-
 * 分配适当内存
-* 垃圾回收器定期扫描计算引用数量
-* 引用0或惟一引用是循环即可回收
+* 垃圾回收器定期扫描计算引用数
+* 引用0或惟一引用是循环即回收
 
-**哪些操作会造成内存泄漏？**
 
+**内存泄漏**
 - 非var全局变量
 - 闭包函数
 - 循环引用
 - console.log
-- 移除存在事件的DOM
+- 移除带事件DOM
+
 
 **setTimeout模拟setInterval,实现mySetInterval**
 
@@ -1150,25 +1141,6 @@ function method(){
 mySetInterval(method, 1000)
 setTimeout('clearTimeout(method.id)', 10000)
 
-```
-
-**js实现二叉树bfs**
-```
-var testTree = {
-  value: 'A',
-  childNodes: [{
-    value: 'B',
-    childNodes:[{
-      value: 'D'
-    }]
-  }, {
-    value: 'C',
-    childNodes:[{
-      value: 'E',
-      childNodes:
-    }]
-  }]
-}
 ```
 
 
