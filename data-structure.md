@@ -117,7 +117,29 @@ function dfs(root){
 dfs(testTree)//A B D E C F H
 ```
 
+**二分查找**
+```
+var arr=[0,1,2,3,4,5,6,7,8,9]
+function binarySearch(arr,target){
+    var left=0
+    var right=arr.length
+    while(left<right){
+        var middle = parseInt((left+right+1)/2)
+        if(arr[middle]===target){
+            return middle
+        }
+        if(arr[middle]<target){
+            left = middle
+        }
+        if(arr[middle]>target){
+            right = middle
+        }
+    }
+    return -1;
+}
+binarySearch(arr, 6)
 
+```
 
 
 
