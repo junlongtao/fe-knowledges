@@ -1,30 +1,14 @@
-**栈和队列**
-
+**栈 队列**
 - 队列先进先出，栈先进后出
 
-**栈和堆的区别？**
 
-- 栈区（stack）编译器自动分配释放
+**栈 堆区别**
+- stack编译器自动分配释放
+- heap程序员分配释放OS回收
 
-- 堆区（heap）程序员分配释放,OS回收。
 
-- 堆：树
-
-- 栈：先进后出
-
-**快速 排序的思想并实现一个快排？**
-
-"快速排序"的思想很简单，整个排序过程只需要三步：
-
-- （1）在数据集之中，找一个基准点
-
-- （2）建立两个数组，分别存储左边和右边的数组
-
-- （3）利用递归进行下次比较
-
-```
- <script type="text/javascript">
-
+**快排**
+``` 
         function quickSort(arr){
             if(arr.length<=1){
                 return arr;//如果数组只有一个数，就直接返回；
@@ -48,9 +32,28 @@
             return quickSort(left).concat([numValue],quickSort(right));//递归不断重复比较
         }
 
-        alert(quickSort([32,45,37,16,2,87]));//弹出“2,16,32,37,45,87”
+        quickSort([32,45,37,16,2,87])
 
-    </script>
+        function quickSort(arr){
+            if(arr.length<=1){
+                return arr
+            }
+
+            var base = Math.floor(arr.length/2)
+            var baseValue = arr.splice(base, 1) 
+            var left = []
+            var right = []
+            for(var i=0; i<arr.length; i++){
+                if(arr[i]<baseValue){
+                    left.push(arr[i])
+                }else{
+                    right.push(arr[i])
+                }
+            }
+            
+            return quickSort(left).concat(baseValue, quickSort(right))
+        }
+        quickSort([32,45,37,16,2,87])
 ```
 
 **二叉树bfs,dfs**
