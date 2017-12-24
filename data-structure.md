@@ -126,7 +126,24 @@ binarySearch(arr, 6)
 
 
 
+**10进制转2进制**
+```
+function ten2binary(n){
+    var res = ''
 
+    while(n>0){
+        if(n%2==0){
+            res = '0'+res
+        }else{
+            res = '1'+res
+        }
+        n = parseInt(n/2)
+    }
+    return res
+}
+ten2binary(15)//1111
+
+```
 
 
 
