@@ -1,25 +1,22 @@
 ### CSS
 ---
 
-**display: none; 与 visibility: hidden; 的区别**
+**display:none; visibility:hidden;**
+- `display:none`元素消失，`visibility: hidden`只是不可见
+- `display:none`非继承，`visibility:hidden`继承
+- `display`重排,`visibility`重绘
+- `display: none;`不读屏；`visibility: hidden`读屏
 
-- 联系：它们都能让元素不可见
-- 区别：
-  - `display:none`;会让元素完全从渲染树中消失，渲染的时候不占据任何空间；`visibility: hidden`;不会让元素从渲染树消失，渲染师元素继续占据空间，只是内容不可见
-  - `display: none`;是非继承属性，子孙节点消失由于元素从渲染树消失造成，通过修改子孙节点属性无法显示；`visibility:hidden`;是继承属性，子孙节点消失由于继承了`hidden`，通过设置`visibility: visible`;可以让子孙节点显式
-  - 修改常规流中元素的`display`通常会造成文档重排。修改`visibility`属性只会造成本元素的重绘
-  - 读屏器不会读取`display: none;`元素内容；会读取`visibility: hidden`元素内容
 
-**css hack原理及常用hack**
 
-- 原理：利用不同浏览器对CSS的支持和解析结果不一样编写针对特定浏览器样式。
-- 常见的hack有
-  - 属性hack
-  - 选择器hack
-  - IE条件注释
+**css hack**
+- 属性hack
+- 选择器hack
+- IE条件注释
 
-**link 与 @import 的区别**
 
+
+**link 与 @import**
  - `link` 是`HTML`方式， `@import` 是`CSS`方式
  - `link `最大限度支持并行下载，` @import` 过多嵌套导致串行下载，出现FOUC
  - `link` 可以通过 `rel="alternate stylesheet"` 指定候选样式
@@ -27,9 +24,12 @@
  - `@import` 必须在样式规则之前，可以在`css`文件中引用其他文件
  - 总体来说：`link`优于`@import`
 
-**CSS有哪些继承属性**
 
-- 关于文字排版的属性如：
+
+
+**CSS继承属性**
+
+- 文字排版属性：
   - `font`
 	- `word-break`
 	- `letter-spacing`
@@ -45,31 +45,23 @@
   - `visibility`
   - `cursor`
 
-**display,float,position的关系**
-
-- 如果 `display` 为`none`，那么`position`和`float`都不起作用，这种情况下元素不产生框
-- 否则，如果`position`值为`absolute`或者`fixed`，框就是绝对定位的，`float`的计算值为`none`，`display`根据下面的表格进行调整
-- 否则，如果`float`不是`none`，框是浮动的，`display`根据下表进行调整
-- 否则，如果元素是根元素，`display`根据下表进行调整
-- 其他情况下`display`的值为指定值 总结起来：绝对定位、浮动、根元素都需要调整 `display`
-
-**外边距折叠(collapsing margins)**
-
-- 毗邻的两个或多个 `margin` 会合并成一个`margin`，叫做外边距折叠。规则如下：
-  - 两个或多个毗邻的普通流中的块元素垂直方向上的`margin`会折叠
-  - 浮动元素或`inline-block`元素或绝对定位元素的`margin`不会和垂直方向上的其他元素的margin折叠
-  - 创建了块级格式化上下文的元素，不会和它的子元素发生margin折叠
-  - 元素自身的`margin-bottom`和`margin-top`相邻时也会折
 
 
-**介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？**
+**外边距折叠**
+- 毗邻`margin`垂直合并 
+- 浮动 `inline-block` 绝对定位 不折叠
+- BFC元素不和子元素折叠 
 
-- 有两种， IE 盒子模型、W3C 盒子模型；
-- 盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；
-- 区  别： IE的content部分把 border 和 padding计算了进去;
 
-**CSS选择符有哪些？哪些属性可以继承？**
 
+**盒模型**
+- IE盒子(content-box)、W3C盒子(border-box)
+- box-sizing:border-box(width=content+padding+border+margin)
+- box-sizing:content-box(width=content)
+
+
+
+**CSS选择符**
 - id选择器（ # myid）
 - 类选择器（.myclassname）
 - 标签选择器（div, h1, p）
@@ -79,23 +71,20 @@
 - 通配符选择器（ * ）
 - 属性选择器（a[rel = "external"]）
 - 伪类选择器（a:hover, li:nth-child）
+ 
 
-- 可继承的样式： `font-size font-family color, UL LI DL DD DT`
-- 不可继承的样式：`border padding margin width height `
 
-**CSS优先级算法如何计算？**
+**CSS优先级**
+- `!important >  id > class > tag`
 
-- 优先级就近原则，同权重情况下样式定义最近者为准
-- 载入样式以最后载入的定位为准
-- 优先级为: `!important >  id > class > tag` important 比 内联优先级高
 
-**CSS3新增伪类有那些？**
 
+**CSS3新增伪类**
 ```
 p:first-of-type 选择属于其父元素的首个 <p> 元素的每个 <p> 元素。
 p:last-of-type  选择属于其父元素的最后 <p> 元素的每个 <p> 元素。
 p:only-of-type  选择属于其父元素唯一的 <p> 元素的每个 <p> 元素。
-p:only-child        选择属于其父元素的唯一子元素的每个 <p> 元素。
+p:only-child    选择属于其父元素的唯一子元素的每个 <p> 元素。
 p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元素。
 
 :after          在元素之前添加内容,也可以用来做清除浮动。
@@ -105,34 +94,9 @@ p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元�
 :checked        单选框或复选框被选中
 ```
 
-**如何居中div？如何居中一个浮动元素？如何让绝对定位的div居中？**
 
-- 给`div`设置一个宽度，然后添加`margin:0 auto`属性
 
-```
-div{
-    width:200px;
-    margin:0 auto;
- }
- ```
-- 居中一个浮动元素
-
-```
-//确定容器的宽高 宽500 高 300 的层
-//设置层的外边距
-
- .div {
-      width:500px ; height:300px;//高度可以不设
-      margin: -150px 0 0 -250px;
-      position:relative;         //相对定位
-      background-color:pink;     //方便看效果
-      left:50%;
-      top:50%;
- }
- ```
- 
- - 让绝对定位的div居中
- 
+**绝对定位div居中** 
 ```
   position: absolute;
   width: 1200px;
@@ -142,10 +106,11 @@ div{
   left: 0;
   bottom: 0;
   right: 0;
-  ```
+```
   
-**display有哪些值？说明他们的作用**
-  
+
+
+**display**
 - block         象块类型元素一样显示。
 - none          缺省值。象行内元素类型一样显示。
 - inline-block  象行内元素一样显示，但其内容象块类型元素一样显示。
@@ -153,36 +118,19 @@ div{
 - table         此元素会作为块级表格来显示
 - inherit       规定应该从父元素继承 display 属性的值
 
-**position的值relative和absolute定位原点是？**
 
-- absolute
-    - 生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
-- fixed （老IE不支持）
-    - 生成绝对定位的元素，相对于浏览器窗口进行定位。
-- relative
-    - 生成相对定位的元素，相对于其正常位置进行定位。
-- static
-    - 默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right - z-index 声明）。
-- inherit
-    - 规定从父元素继承 position 属性的值
-    
-**CSS3有哪些新特性？**
 
- - 新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）
- - 圆角           （border-radius:8px）
- - 多列布局        （multi-column layout）
- - 阴影和反射        （Shadow\Reflect）
- - 文字特效      （text-shadow、）
- - 文字渲染      （Text-decoration）
- - 线性渐变      （gradient）
- - 旋转          （transform）
- - 增加了旋转,缩放,定位,倾斜,动画，多背景
- - `transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:`
+**position定位原点**
+- absolute      非static第一父元素
+- fixed         浏览器窗口
+- relative      正常位置
+- static        默认值 出现在正常流中
+- inherit       继承父元素
+
+
  
-**用纯CSS创建一个三角形的原理是什么？**
-
+**纯CSS三角形**
 ```
-// 把上、左、右三条边隐藏掉（颜色设为 transparent）
 #demo {
   width: 0;
   height: 0;
@@ -192,89 +140,50 @@ div{
 }
 ```
 
-**一个满屏 品 字布局 如何设计?**
-
-- 简单的方式：
-    - 上面的div宽100%，
-    - 下面的两个div分别宽50%，
-    - 然后用float或者inline使其不换行即可
-    
-**经常遇到的浏览器的兼容性有哪些？原因，解决方法是什么，常用hack的技巧 ？**
-
-- png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8.
-- 浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一
-- IE下,可以使用获取常规属性的方法来获取自定义属性,也可以使用getAttribute()获取自定义属性;
-- Firefox下,只能使用getAttribute()获取自定义属性。
-   - 解决方法:统一通过getAttribute()获取自定义属性
-   
--  IE下,even对象有x,y属性,但是没有pageX,pageY属性
--  Firefox下,event对象有pageX,pageY属性,但是没有x,y属性
-
-**li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？**
-
-- 行框的排列会受到中间空白（回车\空格）等的影响，因为空格也属于字符,这些空白也会被应用样式，占据空间，所以会有间隔，把字符大小设为0，就没有空格了
-
-**为什么要初始化CSS样式**
-
-- 因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异
-
-**对BFC规范(块级格式化上下文：block formatting context)的理解？**
-
-- 一个页面是由很多个 Box 组成的,元素的类型和 display 属性,决定了这个 Box 的类型
-- 不同类型的 Box,会参与不同的 Formatting Context（决定如何渲染文档的容器）,因此Box内的元素会以不同的方式渲染,也就是说BFC内部的元素和外部的元素不会互相影响
-
-**css定义的权重**
-
-```
-// 以下是权重的规则：标签的权重为1，class的权重为10，id的权重为100，以下/// 例子是演示各种定义的权重值：
-
-/*权重为1*/
-div{
-}
-/*权重为10*/
-.class1{
-}
-/*权重为100*/
-#id1{
-}
-/*权重为100+1=101*/
-#id1 div{
-}
-/*权重为10+1=11*/
-.class1 div{
-}
-/*权重为10+10+1=21*/
-.class1 .class2 div{
-}
-
-// 如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现
-```
-
-**display:inline-block 什么时候会显示间隙？(携程)**
-
-- 移除空格、使用margin负值、使用font-size:0、letter-spacing、word-spacing
-
-**谈谈浮动和清除浮动**
-
-- 浮动的框可以向左或向右移动，直到他的外边缘碰到包含框或另一个浮动框的边框为止。由于浮动框不在文档的普通流中，所以文档的普通流的块框表现得就像浮动框不存在一样。浮动的块框会漂浮在文档普通流的块框上
 
 
-**介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？**
+**满屏品字布局** 
+- 上面的div宽100%，
+- 下面的两个div分别宽50%，
+- 然后用float或者inline使其不换行即可
+  
 
-* 盒子模型构成：内容(content)、内填充(padding)、 边框(border)、外边距(margin)
-* IE8及其以下版本浏览器，未声明 DOCTYPE，内容宽高会包含内填充和边框，称为怪异盒模型(IE盒模型)
-* 标准(W3C)盒模型：元素宽度 = width + padding + border + margin
-* 怪异(IE)盒模型：元素宽度 = width + margin
-* 标准浏览器通过设置 css3 的 box-sizing: border-box 属性，触发“怪异模式”解析计算宽高
 
-**box-sizing 常用的属性有哪些？分别有什么作用？**
+**常遇到的浏览器兼容性** 
+- 浏览器默认margin和padding不同 => *{margin:0;padding:0;}
+- Firefox只能getAttribute() => 都使用getAttribute()
+- IE even有x,y无pageX,pageY，Firefox event有pageX,pageY无x,y
 
+
+ 
+**li之间空白间隔**
+-字符大小设0
+
+
+
+**BFC(block formatting context)**
+-BFC内外部元素不会互相影响
+
+
+
+**css权重**
+- 标签1，class 10，id 100
+
+
+
+**display:inline-block移除间隙(携程)**
+- 移除空格、margin-right:-3px、font-size:0、letter-spacing:0、word-spacing:0
+
+
+
+**box-sizing**
 * box-sizing: content-box;  // 默认的标准(W3C)盒模型元素效果
 * box-sizing: border-box;   // 触发怪异(IE)盒模型元素的效果
 * box-sizing: inherit;      //  继承父元素 box-sizing 属性的值
 
-**CSS选择器有哪些？**
 
+
+**CSS选择器有哪些？**
 * id选择器        #id
 * 类选择器        .class
 * 标签选择器      div, h1, p
@@ -285,19 +194,21 @@ div{
 * 属性选择器      a[rel='external']
 * 伪类选择器      a:hover, li:nth-child
 
-**CSS哪些属性可以继承？哪些属性不可以继承？**
 
-* 可以继承的样式：font-size、font-family、color、list-style、cursor
-* 不可继承的样式：width、height、border、padding、margin、background
+
+**CSS继承**
+* 继承：font-size、font-family、color、list-style、cursor
+* 不继承：width、height、border、padding、margin、background
+
+
 
 **CSS如何计算选择器优先？**
+- 行内样式[1000] > id[100] > class[10] > tag[1]
+- !important 优先级最高
 
-* 相同权重，定义最近者为准：行内样式 > 内部样式 > 外部样式
-* 含外部载入样式时，后载入样式覆盖其前面的载入的样式和内部样式
-* 选择器优先级: 行内样式[1000] > id[100] > class[10] > Tag[1]
-* 在同一组属性设置中，!important 优先级最高，高于行内样式
 
-**CSS3新增伪类有哪些？**
+
+**CSS3新增伪类**
 
 - :root           选择文档的根元素，等同于 html 元素
 
@@ -334,8 +245,9 @@ div{
 - :first-line     选择元素中的第一行
 - :first-letter   选择元素中的第一个字符
 
-**请列举几种隐藏元素的方法**
 
+
+**隐藏元素**
 * visibility: hidden;   这个属性只是简单的隐藏某个元素，但是元素占用的空间任然存在
 * opacity: 0;           CSS3属性，设置0可以使一个元素完全透明
 * position: absolute;   设置一个很大的 left 负值定位，使元素定位在可见区域之外
@@ -345,16 +257,16 @@ div{
 * height: 0;            将元素高度设为 0 ，并消除边框
 * filter: blur(0);      CSS3属性，将一个元素的模糊度设置为0，从而使这个元素“消失”在页面中
 
-**rgba() 和 opacity 的透明效果有什么不同？**
-* opacity 作用于元素以及元素内的所有内容（包括文字）的透明度
-* rgba() 只作用于元素自身的颜色或其背景色，子元素不会继承透明效果
 
-**css 属性 content 有什么作用？**
 
-- content 属性专门应用在 before/after 伪元素上，用于插入额外内容或样式
 
-**CSS3有哪些新特性？**
+**rgba() opacity**
+* opacity 所有内容（包括文字）透明
+* rgba() 只作用元素自身
 
+
+
+**CSS3新特性**
 - 新增选择器     p:nth-child(n){color: rgba(255, 0, 0, 0.75)}
 - 弹性盒模型     display: flex;
 - 多列布局       column-count: 5;
@@ -377,53 +289,37 @@ div{
 - 平滑过渡       transition: all .3s ease-in .1s;
 - 动画           @keyframes anim-1 {50% {border-radius: 50%;}} animation: anim-1 1s;
 
-**请解释一下 CSS3 的 Flexbox（弹性盒布局模型）以及适用场景？**
 
+
+**Flexbox**
 - Flexbox 用于不同尺寸屏幕中创建可自动扩展和收缩布局
 
-**经常遇到的浏览器的JS兼容性有哪些？解决方法是什么？**
 
+
+**常遇到的JS兼容性**
 * 当前样式：getComputedStyle(el, null) VS el.currentStyle
 * 事件对象：e VS window.event
 * 鼠标坐标：e.pageX, e.pageY VS window.event.x, window.event.y
 * 按键码：e.which VS event.keyCode
 * 文本节点：el.textContent VS el.innerText
 
-**li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？**
 
-* li排列受到中间空白(回车/空格)等的影响，因为空白也属于字符，会被应用样式占据空间，产生间隔
-* 解决办法：在ul设置设置font-size=0,在li上设置需要的文字大小
-
-**什么是外边距重叠？ 重叠的结果是什么？**
-
-* 外边距重叠就是 margin-collapse
-* 相邻的两个盒子（可能是兄弟关系也可能是祖先关系）的外边距可以结合成一个单独的外边距。
-这种合并外边距的方式被称为折叠，结合而成的外边距称为折叠外边距
-
-* 折叠结果遵循下列计算规则：
-    - 两个相邻的外边距都是正数时，折叠结果是它们两者之间较大的值
-    - 两个相邻的外边距都是负数时，折叠结果是两者绝对值的较大值
-    - 两个外边距一正一负时，折叠结果是两者的相加的和
     
 **请写出多种等高布局**
-
 * 在列的父元素上使用这个背景图进行Y轴的铺放，从而实现一种等高列的假像
 * 模仿表格布局等高列效果：兼容性不好，在ie6-7无法正常运行
 * css3 flexbox 布局： .container{display: flex; align-items: stretch;}
 
-**css垂直居中的方法有哪些？**
 
-* 如果是单行文本, line-height 设置成和 height 值
 
+**css垂直居中**
 ```
+//文本
 .vertical {
-      height: 100px;
-      line-height: 100px;
-    }
-```
-* 已知高度的块级子元素，采用绝对定位和负边距
-
-```
+  height: 100px;
+  line-height: 100px;
+}
+//已知宽高
 .container {
   position: relative;
 }
@@ -433,41 +329,15 @@ div{
   top:50%;  /*父元素高度50%*/
   margin-top: -150px; /*自身高度一半*/
 }
-```
-
- * 未知高度的块级父子元素居中，模拟表格布局
- * 缺点：IE67不兼容，父级 overflow：hidden 失效
- 
-```
+//未知宽高
 .container {
-      display: table;
-    }
-    .content {
-      display: table-cell;
-      vertical-align: middle;
-    }
-
-```
-    
-* 新增 inline-block 兄弟元素，设置 vertical-align
-   - 缺点：需要增加额外标签，IE67不兼容
-   
-```
-
-.container {
-  height: 100%;/*定义父级高度，作为参考*/
+  display: table;
 }
-.extra .vertical{
-  display: inline-block;  /*行内块显示*/
-  vertical-align: middle; /*垂直居中*/
+.content {
+  display: table-cell;
+  vertical-align: middle;
 }
-.extra {
-  height: 100%; /*设置新增元素高度为100%*/
-}
-```
-* 绝对定位配合 CSS3 位移
-
-```
+//不定宽高
 .vertical {
   position: absolute;
   top:50%;  /*父元素高度50%*/
@@ -475,8 +345,9 @@ div{
 }
 ```
 
-* CSS3弹性盒模型
 
+
+**CSS3弹性盒模型**
 ```
 .container {
   display:flex;
@@ -484,6 +355,8 @@ div{
   align-items: center; /*子元素垂直居中*/
 }
 ```
+
+
 
 **圣杯布局的实现原理？**
 
