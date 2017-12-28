@@ -425,10 +425,15 @@ p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元�
 }
 ```
 
-**在CSS样式中常使用 px、em 在表现上有什么区别？**
+**px vs em vs rem**
 
-* px 相对于显示器屏幕分辨率，无法用浏览器字体放大功能
-* em 值并不是固定的，会继承父级的字体大小： em = 像素值 / 父级font-size
+* px精确稳定，无法自适应
+* em = 像素值 / 父级font-size
+```
+html{font-size: 62.5%;}
+body{font-size: 1.4rem;}
+h1{font-size: 2.4rem;}
+```
 
 **为什么要初始化CSS样式？**
 

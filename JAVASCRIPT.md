@@ -3,26 +3,50 @@
 ---
 
 
-**JavaScript的组成**
+**this**
+- 直接调用, this=>window
+- 方法调用，this=>调用者
+- IIFE,this=>window
+- new, this=>实例
+- apply, call, this=>传入obj
+```
+var a = [1,2]
+a.b = function(){
+  console.log(this)
+}
+a.b()//a
+setTimeout(a.b, 1000)//window
+```
 
+
+
+**JavaScript的组成**
 - js=es+dom+bom
       
-**JS的基本数据类型和引用数据类型**
 
+
+**JS的基本数据类型和引用数据类型**
 - 基本：undefined、null、boolean、number、string、symbol
 - 引用：object、array、function
+
+
+
 
 **检测浏览器版本版本有哪些方式？**
 - navigator.userAgent.toLowerCase().indexOf('chrome') 
 
-**介绍JS有哪些内置对象？**
 
+
+
+**介绍JS有哪些内置对象？**
 - 数据封装类：Object、Array、Boolean、Number、String
 - 其他对象：Function、Arguments、Math、Date、RegExp、Error
 - ES6新增：Symbol、Map、Set、Promise、Proxy、Reflect
 
-**说几条写JavaScript的基本规范？**
 
+
+
+**说几条写JavaScript的基本规范？**
 - 四空格缩进
 - 使用{}包裹
 - 分号;结束

@@ -129,6 +129,9 @@ binarySearch(arr, 6)
 **10进制转2进制**
 ```
 function ten2binary(n){
+    if(n<=0){
+        return 0
+    }
     var res = ''
 
     while(n>0){
@@ -141,8 +144,9 @@ function ten2binary(n){
     }
     return res
 }
-ten2binary(15)//1111
-
+for(let i=0;i<100;i++){
+    console.log(ten2binary(i))
+}
 ```
 
 
