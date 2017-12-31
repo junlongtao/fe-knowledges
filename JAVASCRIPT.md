@@ -1,6 +1,72 @@
 
 ### JavaScript
----
+
+
+**add(3)(4)=7**
+```
+function add(num){
+    var res = num
+    return function(num){
+        res = res+num
+        return res
+    }
+}
+add(3)(4)
+```
+
+
+**var a=b=3**
+```
+function test(){
+    var a = b =3;
+}
+test()
+console.log(a)//Uncaught ReferenceError: a is not defined
+console.log(b)//not run
+```
+
+
+
+**判断变量类型**
+```
+Object.prototype.toString.call('jkl') === '[object String]'
+Object.prototype.toString.call(88888) === '[object Number]'
+Object.prototype.toString.call(false) === '[object Boolean]'
+Object.prototype.toString.call(undefined) === '[object Undefined]'
+Object.prototype.toString.call(null) === '[object Null]'
+Object.prototype.toString.call({a:88888}) === '[object Object]'
+Object.prototype.toString.call([1,2,3,4,5]) === '[object Array]'
+Object.prototype.toString.call(function a(){}) === '[object Function]'
+Object.prototype.toString.call(Symbol('user_id')) === '[object Symbol]'
+Object.prototype.toString.call(new Date()) === '[object Date]'
+Object.prototype.toString.call(/\d+/) === '[object RegExp]'
+```
+
+
+
+**实现indexOf**
+```javascript
+(function(){
+  Array.prototype.indexOf = Array.prototype.indexOf || function(el){
+      if(this === null || ele === null){
+          return -1;
+      }
+      var index = -1;
+      var len = this.length;
+      for(let i=0; i<len; i++){
+          if(this[i] === el){
+              return i;
+          }
+      }
+      return -1;
+  }
+  let a = [3,6,99,2,10]
+  console.log(null.indexOf(5))
+  console.log(a.indexOf())
+  console.log(a.indexOf(99))
+})()
+```
+
 
 
 **this**
@@ -25,9 +91,9 @@ setTimeout(a.b, 1000)//window
       
 
 
-**JS的基本数据类型和引用数据类型**
-- 基本：undefined、null、boolean、number、string、symbol
-- 引用：object、array、function
+**基本数据类型 引用数据类型**
+- 基本：undefined、null、boolean、number、string、symbol -- stack
+- 引用：object、array、function -- heap
 
 
 
@@ -45,8 +111,7 @@ setTimeout(a.b, 1000)//window
 
 
 
-
-**说几条写JavaScript的基本规范？**
+**JavaScript基本规范**
 - 四空格缩进
 - 使用{}包裹
 - 分号;结束
@@ -55,8 +120,9 @@ setTimeout(a.b, 1000)//window
 - JSON补全双引号
 - 用{}和[]声明
 
-**如何编写高性能的JavaScript？**
 
+
+**高性能JavaScript**
 * "use strict";
 * js置底
 * js打包
@@ -66,30 +132,27 @@ setTimeout(a.b, 1000)//window
 * window属性省略window
 * 减少对象成员嵌套
 * 缓存DOM节点
-* 避免eval()Function()
-* setTimeout()setInterval()传递函数
+* 避免eval(),Function()
+* setTimeout(),setInterval()传递函数
 * 直接量创建对象和数组
 * 最小化repaint和reflow
 
 
+
 **描述浏览器的渲染过程，DOM树和渲染树的区别？**
+- 解析HTML构建DOM树，并行请求css/image/js构建CSS树，生成Render Tree，布局(Layout)，显示(Painting)  
+- dom tree包括head和隐藏元素,render tree不包括head和隐藏元素
 
-- 浏览器的渲染过程：
-  - 解析HTML构建DOM树，并行请求css/image/js构建CSS树，生成Render Tree，布局(Layout)，显示(Painting)
-  
-- DOM树 和 渲染树 的区别：
-  - DOMtree包括head和隐藏元素
-  - render tree不包括head和隐藏元素
 
-**重绘和回流（重排）的区别和关系？**
 
+**重绘repaint vs 回流reflow**
 - 重绘：外观（如：颜色）改变
 - 回流：布局（如：尺寸、位置、隐藏/状态状态）改变,offsetLeft、scrollTop、getComputedStyle等
-- 回流引起重绘，重绘不一定回流
+- 回流必重绘，重绘不回流
 
 
-**如何最小化重绘(repaint)和回流(reflow)？**
 
+**最小化repaint reflow**
 - display:none操作完再显示
 - DocumentFragment创建后一次性加入
 - 缓存elem.offsetLeft
@@ -98,64 +161,49 @@ setTimeout(a.b, 1000)//window
 - css简写如border代替border-width, border-style, border-color
 - className 和 style.cssText 代替 style.xxx
 
-**script 的位置是否会影响首屏显示时间？**
 
+
+**script位置是否影响首屏时间**
 - 不影响开始影响完成
 
-**解释JavaScript中的作用域与变量声明提升？**
 
-- JavaScript作用域：
-  - function(){}内的区域，称为函数作用域。
 
-- JavaScript变量声明提升：
-  -  函数与变量提升到当前作用域顶部。赋值不提，名称提
-  -  函数声明会覆盖变量声明
+**变量声明提升** 
+- 函数与变量提升到当前作用域顶部。赋值不提，名称提
+- 函数声明会覆盖变量声明
 
-**介绍JavaScript的原型，原型链？有什么特点？** 
-  - obj.__proto__ = Obj.prototype
-  - 直到找到属性/方法或 undefined 为止
-  
-  
 
-**JavaScript有几种类型的值？，你能画一下他们的内存图吗**
 
-- 原始(Undefined，Null，Boolean，Number、String）-- stack
-- 引用(对象、数组和函数）-- heap
-
-**JavaScript如何实现一个类，怎么实例化这个类？**
-
-- function -- new
-  - 缺点：用到了 this 和 prototype，编写复杂，可读性差
-
+**类和实例**
 ```javascript
-  function Mobile(name, price){
-     this.name = name;
-     this.price = price;
-   }
-   Mobile.prototype.sell = function(){
-      alert(this.name + "，售价 $" + this.price);
-   }
-   var iPhone7 = new Mobile("iPhone7", 1000);
-   iPhone7.sell();
+//prototype, 编写复杂
+function Mobile(name, price){
+   this.name = name;
+   this.price = price;
+}
+Mobile.prototype.sell = function(){
+    alert(this.name + "，售价 $" + this.price);
+}
+var iPhone7 = new Mobile("iPhone7", 1000);
+iPhone7.sell();
 ```
-- Object.create
-- 缺点：不能实现私有属性和私有方法，实例对象之间也不能共享数据
 
 ```javascript
- var Person = {
-     firstname: "Mark",
-     lastname: "Yun",
-     age: 25,
-     introduce: function(){
-         alert('I am ' + Person.firstname + ' ' + Person.lastname);
-     }
- };
+//Object.create, 不支持私有属性/方法
+var Person = {
+   firstname: "Mark",
+   lastname: "Yun",
+   age: 25,
+   introduce: function(){
+       alert('I am ' + Person.firstname + ' ' + Person.lastname);
+   }
+};
 
- var person = Object.create(Person);
- person.introduce();
+var person = Object.create(Person);
+person.introduce();
 
- // Object.create 要求 IE9+，低版本浏览器可以自行部署：
- if (!Object.create) {
+// Object.create 要求 IE9+，低版本浏览器可以自行部署：
+if (!Object.create) {
 　   Object.create = function (o) {
 　　　 function F() {}
 　　　 F.prototype = o;
@@ -163,132 +211,98 @@ setTimeout(a.b, 1000)//window
 　　};
 　}
 ```
-- 对象+createNew()
-  - 优点：容易理解，结构清晰优雅，符合传统的"面向对象编程"的构造
-   
-```javascript
- var Cat = {
-   age: 3, // 共享数据 -- 定义在类对象内，createNew() 外
-   createNew: function () {
-     var cat = {};
-     // var cat = Animal.createNew(); // 继承 Animal 类
-     cat.name = "小咪";
-     var sound = "喵喵喵"; // 私有属性--定义在 createNew() 内，输出对象外
-     cat.makeSound = function () {
-       alert(sound);  // 暴露私有属性
-     };
-     cat.changeAge = function(num){
-       Cat.age = num; // 修改共享数据
-     };
-     return cat; // 输出对象
-   }
- };
 
- var cat = Cat.createNew();
- cat.makeSound();
+```javascript
+//对象+createNew()
+var Cat = {
+ age: 3, // 共享数据 -- 定义在类对象内，createNew() 外
+ createNew: function () {
+   var cat = {};
+   // var cat = Animal.createNew(); // 继承 Animal 类
+   cat.name = "小咪";
+   var sound = "喵喵喵"; // 私有属性--定义在 createNew() 内，输出对象外
+   cat.makeSound = function () {
+     alert(sound);  // 暴露私有属性
+   };
+   cat.changeAge = function(num){
+     Cat.age = num; // 修改共享数据
+   };
+   return cat; // 输出对象
+ }
+};
+
+var cat = Cat.createNew();
+cat.makeSound();
 ```
   
-- ES6 语法糖 class -- new   
-
 ```javascript
-     class Point {
-       constructor(x, y) {
-         this.x = x;
-         this.y = y;
-       }
-       toString() {
-         return '(' + this.x + ', ' + this.y + ')';
-       }
-     }
+//语法糖class new
+class Point {
+  constructor(x, y) {
+   this.x = x;
+   this.y = y;
+  }
+  toString() {
+   return '(' + this.x + ', ' + this.y + ')';
+  }
+}
 
-  var point = new Point(2, 3);
-  ```
+var point = new Point(2, 3);
+```
+
+
 
 **Javascript如何实现继承？**
-
-- call 或 apply
-
-```javascript   　
+```javascript 
+//call/apply  　
 function Cat(name,color){
  　Animal.apply(this, arguments);
  　this.name = name;
  　this.color = color;
 }
-```
-- prototype 指向父对象实例     
- 
-```javascript
+
+//prototype
 Cat.prototype = new Animal();
-Cat.prototype.constructor = Cat;
+Cat.prototype.constructor = Cat; 
+
+//拷贝       　　
+function extend(Child, Parent) {
+　　　var p = Parent.prototype;
+　　　var c = Child.prototype;
+　　　for (var i in p) {
+　　　   c[i] = p[i];
+　　　}
+　　　c.uber = p;
+} 
+
+//extends
+class ColorPoint extends Point {
+   constructor(x, y, color) {
+      super(x, y); // 调用父类的constructor(x, y)
+      this.color = color;
+   }
+   toString() {
+      return this.color + ' ' + super.toString(); // 调用父类的toString()
+   }
+}
 ```
 
-- 拷贝
- 
-```javascript         　　
-    function extend(Child, Parent) {
-  　　　var p = Parent.prototype;
-  　　　var c = Child.prototype;
-  　　　for (var i in p) {
-  　　　   c[i] = p[i];
-  　　　}
-  　　　c.uber = p;
-  　 }
-  ```
 
-- prototype 指向父对象prototype      
 
-```javascript
-    function extend(Child, Parent) {
-        var F = function(){};
-      　F.prototype = Parent.prototype;
-      　Child.prototype = new F();
-      　Child.prototype.constructor = Child;
-      　Child.uber = Parent.prototype;
-    }
-  ```
-
-- extends
-
-```javascript
-    class ColorPoint extends Point {
-       constructor(x, y, color) {
-          super(x, y); // 调用父类的constructor(x, y)
-          this.color = color;
-       }
-       toString() {
-          return this.color + ' ' + super.toString(); // 调用父类的toString()
-       }
-    }
-  ```
-
-**Javascript作用链域?**
-
-- 当前作用域没有找到，向上层作用域查找，直至全局函数
-
-**谈谈this对象的理解**
-
-- this指向函数的直接调用
-- new里面this指向new的实例
-- 事件里面this指向触发对象
-- attachEvent中this指向window
-
-**eval的功能是把对应的字符串解析成JS代码并运行**
-
-- 避免eval不安全耗性能
-- eval('('+ str +')');
-
-**什么是 Window 对象? 什么是 Document 对象?**
-
+**Window对象 Document对象**
 - Window是顶级对象。所有对象、函数、变量都是 Window成员。
 - Document是Window一部分，window.document
 
-**介绍 DOM 的发展**
 
+
+**介绍 DOM 的发展**
 - DOM：文档对象模型（Document Object Model），定义了访问HTML和XML文档的标准，与编程语言及平台无关
 - DOM0：提供了查询和操作Web文档的内容API。未形成标准，实现混乱。如：document.forms['login']
 - DOM1：W3C提出标准化的DOM，简化了对文档中任意部分的访问和操作。如：JavaScript中的Document对象
 - DOM2：原来DOM基础上扩充了鼠标事件等细分模块，增加了对CSS的支持。如：getComputedStyle(elem, pseudo)
 - DOM3：增加了XPath模块和加载与保存（Load and Save）模块。如：XPathEvaluator
+
+
 
 **介绍DOM0，DOM2，DOM3事件处理方式区别**
 
@@ -304,12 +318,14 @@ Cat.prototype.constructor = Cat;
     - `eventUtil.addListener(input, "textInput", func);`
     -  `eventUtil` 是自定义对象，`textInput` 是DOM3级事件
 
-**事件三阶段**
 
+
+**事件三阶段**
 - 捕获目标冒泡
 
-**介绍事件“捕获”和“冒泡”执行顺序和事件的执行次数？**
 
+
+**介绍事件“捕获”和“冒泡”执行顺序和事件的执行次数？**
 - 按照W3C标准的事件：捕获，目标，冒泡
 - 事件执行次数（DOM2-addEventListener）：元素上绑定事件的个数
   - 注意1：前提是事件被确实触发
@@ -320,23 +336,18 @@ Cat.prototype.constructor = Cat;
   - 最终顺序：父元素捕获->目标元素事件1->目标元素事件2->子元素捕获->子元素冒泡->父元素冒泡
   - 注意：子元素事件执行前提    事件确实“落”到子元素布局区域上，而不是简单的具有嵌套关系
 
-**在一个DOM上同时绑定两个点击事件：一个用捕获，一个用冒泡。事件会执行几次，先执行冒泡还是捕获？**
 
+
+**在一个DOM上同时绑定两个点击事件：一个用捕获，一个用冒泡。事件会执行几次，先执行冒泡还是捕获？**
 * 该DOM上的事件如果被触发，会执行两次（执行次数等于绑定次数）
 * 如果该DOM是目标元素，则按事件绑定顺序执行，不区分冒泡/捕获
 * 如果该DOM是处于事件流中的非目标元素，则先执行捕获，后执行冒泡
 
 
-**事件的代理/委托**
 
-* 事件绑定父元素，冒泡触发
-  * 优点：
-    - 减少注册，节省内存
-    - 事件动态添加的子元素上
-  * 缺点：
-    使用不当误触
-  * 示例：
-      
+
+**事件代理/委托**
+* 事件绑定父元素，冒泡触发，减少注册，节省内存
 ```
 ulEl.addEventListener('click', function(e){
     var target = event.target || event.srcElement;
@@ -346,11 +357,14 @@ ulEl.addEventListener('click', function(e){
 }, false);
 ```
 
-**IE与火狐的事件机制有什么区别？ 如何阻止冒泡？**
 
-* IE冒泡；火狐捕获冒泡
 
-**IE的事件处理和W3C的事件处理有哪些区别？**
+**事件机制: IE vs 火狐**
+- IE冒泡；火狐捕获冒泡
+
+
+
+**事件处理: IE vs W3C**
 
 * 绑定事件
   - W3C: addEventListener('click', handler, false);
@@ -377,18 +391,19 @@ ulEl.addEventListener('click', function(e){
   - IE: window.event
 
 
-**W3C事件的 target 与 currentTarget 的区别？**
 
+
+**W3C事件的 target 与 currentTarget 的区别？**
 * target 只会出现在事件流的目标阶段
 * currentTarget 可能出现在事件流的任何阶段
 * 当事件流处在目标阶段时，二者的指向相同
 * 当事件流处于捕获或冒泡阶段时：currentTarget 指向当前事件活动的对象(一般为父级)
 
-**如何派发事件(dispatchEvent)？（如何进行事件广播？）**
 
+
+**事件广播**
 * W3C: 使用 dispatchEvent 方法
 * IE: 使用 fireEvent 方法
-
 ```javascript
 var fireEvent = function(element, event){
     if (document.createEventObject){
@@ -402,23 +417,11 @@ var fireEvent = function(element, event){
 }
 ```
 
-**什么是函数节流？介绍一下应用场景和原理？**
 
 
-* 函数节流(throttle)是指阻止一个函数在很短时间间隔内连续调用。
-只有当上一次函数执行后达到规定的时间间隔，才能进行下一次调用。
-但要保证一个累计最小调用间隔（否则拖拽类的节流都将无连续效果）
-
-* 函数节流用于 onresize, onscroll 等短时间内会多次触发的事件
-
-* 函数节流的原理：使用定时器做时间节流。
-当触发一个事件时，先用 setTimout 让这个事件延迟一小段时间再执行。
-如果在这个时间间隔内又触发了事件，就 clearTimeout 原来的定时器，
-再 setTimeout 一个新的定时器重复以上流程。
-
-* 函数节流简单实现：
-
+**函数节流**
 ```javascript
+//常用于onresize onscoll
 function throttle(method, context) {
      clearTimeout(methor.tId);
      method.tId = setTimeout(function(){
@@ -431,11 +434,14 @@ window.onresize = function(){
 }
 ```
 
-**区分什么是“客户区坐标”、“页面坐标”、“屏幕坐标”？**
 
+
+**客户区坐标 页面坐标 屏幕坐标**
 * 客户区坐标：鼠标指针在可视区中的水平坐标(clientX)和垂直坐标(clientY)
 * 页面坐标：鼠标指针在页面布局中的水平坐标(pageX)和垂直坐标(pageY)
 * 屏幕坐标：设备物理屏幕的水平坐标(screenX)和垂直坐标(screenY)
+
+
 
 **如何获得一个DOM元素的绝对位置？**
 
