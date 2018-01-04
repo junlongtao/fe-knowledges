@@ -2,30 +2,6 @@
 ### JavaScript
 
 
-**add(3)(4)=7**
-```
-function add(num){
-    var res = num
-    return function(num){
-        res = res+num
-        return res
-    }
-}
-add(3)(4)
-```
-
-
-**var a=b=3**
-```
-function test(){
-    var a = b =3;
-}
-test()
-console.log(a)//Uncaught ReferenceError: a is not defined
-console.log(b)//not run
-```
-
-
 
 **判断变量类型**
 ```
@@ -43,28 +19,66 @@ Object.prototype.toString.call(/\d+/) === '[object RegExp]'
 ```
 
 
-
 **实现indexOf**
-```javascript
+```
 (function(){
-  Array.prototype.indexOf = Array.prototype.indexOf || function(el){
+  Array.prototype.indexOf = function(ele){
       if(this === null || ele === null){
           return -1;
       }
       var index = -1;
       var len = this.length;
       for(let i=0; i<len; i++){
-          if(this[i] === el){
+          if(this[i] === ele){
               return i;
           }
       }
       return -1;
   }
   let a = [3,6,99,2,10]
-  console.log(null.indexOf(5))
-  console.log(a.indexOf())
   console.log(a.indexOf(99))
 })()
+```
+
+
+
+**实现call, apply, bind**
+```
+Function.prototype.call = function(contenxt){
+    var context = Object(context)||window
+    context.fn = this
+
+    var args = Array.prototype.slice.call(arguments, 1)
+    var res = context.fn(eval(args.join(",")))
+    
+    delete context.fn
+    return res
+}
+
+Function.prototype.apply = function(context, args){
+    var context = Object(context)||window 
+    context.fn = this
+
+    var res
+    if(!args){
+        res = context.fn()
+    }else{
+        var args = []
+        for(var i=0, len=arguments.length; i<len; i++){
+          args.push('arguments['+i']')
+        }
+        res = context.fn(args)
+    }
+    
+    delete context.fn
+    return res
+}
+
+Function.prototype.apply = function(context, args){
+  var res = Function.prototype.call.call(context, [...args])
+  return res
+}
+
 ```
 
 
