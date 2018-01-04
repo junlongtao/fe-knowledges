@@ -24,3 +24,17 @@ async function asyncPrint(value, ms){
 	console.log(value)
 }
 ```
+
+```
+//解构赋值
+var [a,b,...c] = [1,2,3,4,5,6]
+var {a,b,...c} = {
+	a: 1,
+	b: 2,
+	c: 3,
+	d: 4,
+	e: 5
+}
+
+//模板字符串
+	

@@ -1,6 +1,22 @@
-
 ### JavaScript
 
+
+**实现add(1)(2)(3)(4)==10**
+```
+function add(a){
+  function s(b){
+    a = a+b
+    return s
+  }
+  s.toString = function(){
+    return a
+  }
+  return s
+}
+add(1)(2)(3)(4) === 10//false
+add(1)(2)(3)(4) == 10//true
+typeof add(1)(2)(3)(4)//'function'
+```
 
 
 **判断变量类型**
@@ -43,17 +59,33 @@ Object.prototype.toString.call(/\d+/) === '[object RegExp]'
 
 
 **实现call, apply, bind**
-```
-Function.prototype.call = function(contenxt){
-    var context = Object(context)||window
-    context.fn = this
+``` 
+Function.prototype.call = function(context){
+  var context = context||window
+  context.fn = this
 
-    var args = Array.prototype.slice.call(arguments, 1)
-    var res = context.fn(eval(args.join(",")))
-    
-    delete context.fn
-    return res
+  var args = []
+  for(var i=1, len=arguments.length; i<len; i++){
+    args.push('arguments['+i+']')
+  }
+
+  var res = eval('context.fn('+args+')')
+  delete context.fn
+
+  return res
 }
+var value = 2
+var obj = {value: 1}
+function bar(name, age){
+  return {
+    value: this.value, 
+    name: name, 
+    age: age
+  }
+}
+bar.call(null)//{value: 2, name: undefined, age: undefined}
+bar.call(obj, 'kevin', 18)//{value: 1, name: 'kevin', age: 18}
+
 
 Function.prototype.apply = function(context, args){
     var context = Object(context)||window 
