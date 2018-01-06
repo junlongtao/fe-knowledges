@@ -87,24 +87,25 @@ bar.call(null)//{value: 2, name: undefined, age: undefined}
 bar.call(obj, 'kevin', 18)//{value: 1, name: 'kevin', age: 18}
 
 
-Function.prototype.apply = function(context, args){
-    var context = Object(context)||window 
+Function.prototype.apply = function(context, arr){
+    var context = context||window 
     context.fn = this
 
     var res
-    if(!args){
+    if(!arr){
         res = context.fn()
     }else{
         var args = []
-        for(var i=0, len=arguments.length; i<len; i++){
-          args.push('arguments['+i']')
+        for(var i=0, len=arr.length; i<len; i++){
+          args.push('arr['+i+']')
         }
-        res = context.fn(args)
+        res = eval('context.fn('+args+')')
     }
     
     delete context.fn
     return res
 }
+
 
 Function.prototype.apply = function(context, args){
   var res = Function.prototype.call.call(context, [...args])

@@ -1,11 +1,18 @@
 ### CSS
 ---
 
+
+**border-radius**
+- border-radius: 10px 10px 10px 10px/20px 20px 20px 20px//水平半径/垂直半径
+- border-top-left-radius, border-top-right-radius, border-bottom-right-radius,border-bottom-left-radius
+
+
+
 **display:none; visibility:hidden;**
-- `display:none`元素消失，`visibility: hidden`只是不可见
-- `display:none`非继承，`visibility:hidden`继承
-- `display`重排,`visibility`重绘
-- `display: none;`不读屏；`visibility: hidden`读屏
+- none完全消失 hidden占位消失
+- none非继承 hidden继承
+- display重排 visibility重绘
+- display不读屏 visibility读屏
 
 
 
@@ -18,18 +25,15 @@
 
 **link 与 @import**
  - `link` 是`HTML`方式， `@import` 是`CSS`方式
- - `link `最大限度支持并行下载，` @import` 过多嵌套导致串行下载，出现FOUC
- - `link` 可以通过 `rel="alternate stylesheet"` 指定候选样式
+ - `link `最大限度并行下载，` @import` 过多嵌套导致串行下载，出现FOUC
+ - `link rel="alternate stylesheet"` 可指定候选样式
  - 浏览器对 `link` 支持早于` @import` ，可以使用 `@import` 对老浏览器隐藏样式
  - `@import` 必须在样式规则之前，可以在`css`文件中引用其他文件
- - 总体来说：`link`优于`@import`
+ - `link`优于`@import`
 
 
 
-
-**CSS继承属性**
-
-- 文字排版属性：
+**CSS继承** 
   - `font`
 	- `word-break`
 	- `letter-spacing`
@@ -162,7 +166,10 @@ p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元�
 
 
 **BFC(block formatting context)**
--BFC内外部元素不会互相影响
+- 不同的BFC元素不会互相影响
+- BFC可包含浮动撑开高度
+- BFC可防止文字环绕浮动元素
+- overflow:scroll/hidden; display:table/flex; float:left;
 
 
 
