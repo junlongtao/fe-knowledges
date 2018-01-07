@@ -59,6 +59,11 @@ MessageList.childContextTypes = {
 ```
 
 
+**可以setState的时候**
+- componentWillMount, componentDidMount, componentWillReceiveProps可以
+- componentWillUpdate, componentDidUpdate, render不可以，不然循环调用
+
+
 
 **组合 vs 继承**
 - 不推荐继承
