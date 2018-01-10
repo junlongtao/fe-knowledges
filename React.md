@@ -1,3 +1,69 @@
+**React16新特性**
+```
+//可返回string number boolean null portal fragments
+render() { 
+	return [ 
+    	<li key="A"/>First item</li>,
+    	<li key="B"/>Second item</li>,
+    	<li key="C"/>Third item</li>,
+  	];
+}
+
+//error boundary
+import React from 'react'
+export default class ErrorBoundary extends React.Component{
+	componentDidCatch = (err, info) => {
+		this.setState({hasError: true})
+	}
+
+	render = () => {
+		return this.state.hasError?<div>
+			Something went wrong!
+		</div>:this.props.children
+	}
+}
+//error boundary使用方式
+render = () => {
+	return <ErrorBoundary>
+		<Profile user={this.state.user}/>
+	</ErrorBoundary>
+}
+
+//fiber 
+基于window.requestIdleCallback
+stack reconciler => fiber reconciler
+线程时间分片，按优先级调用，优先响应输入和动画等
+lifecycle hook顺序无法保证
+
+//React.createClass/PropTypes/React.createFactory/React.DOM.* 单独分离成包
+
+//createPortal
+import React from 'react'
+import {createPortal} from 'react-dom'
+export default class Dialog extends React.Component{
+
+	constructor = props => {
+		super(props)
+		this.el = document.createElement('div')
+		document.body.appendChild(this.el)
+	} 
+
+	componentWillUnmount = () => {
+		document.body.removeChild(this.el)
+	}
+
+	render = () => {
+		return createPortal(
+			<div class="dialog">
+				{this.props.children}
+			</div>,
+			this.el
+		)
+	}
+}  
+```
+
+
 **生命周期函数**
 //mounting
 - conctructor(props, context) 
@@ -66,7 +132,7 @@ MessageList.childContextTypes = {
 
 
 **组合 vs 继承**
-- 不推荐继承
+- 推荐组合，不推荐继承
 
 
 

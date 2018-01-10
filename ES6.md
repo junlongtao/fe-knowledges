@@ -26,7 +26,8 @@ async function asyncPrint(value, ms){
 ```
 
 ```
-let const块级作用域，不可同名，变量不提升，变量不提升，变量不提升，暂时性死区
+//let const
+块级作用域，不可同名，变量不提升，变量不提升，变量不提升，暂时性死区
 //对象冻结
 Object.preventExtensions(), Object.seal(), Object.freeze()
 
@@ -59,4 +60,15 @@ class Cat extends Animal{
 	}
 }
 
-//
+//Promise
+Promise.prototype.catch = Promise.prototype.then(null, rejection)
+catch后面还可以接着调用then
+
+//map(值-值的映射) set(不可重复)
+const s1 = new Set([NaN, NaN])
+s1.size//1
+const s2 = new Set([{}, {}])
+s2.size//2
+s1.add(1).add(2).add(3)
+s1.size//4
+

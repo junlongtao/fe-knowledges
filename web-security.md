@@ -1,7 +1,19 @@
 **web安全**
 
-- sql注入
-  - 就是通过把SQL命令插入到Web表单递交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令
+```
+//sql注入
+fetch("http://api.xxx.com/user/detail?id=123'or''='")
+
+//xss = cross site scripting
+
+
+//csrf = cross site request forgery
+
+
+
+
+
+```
   
 - 总的来说有以下几点
   - 永远不要信任用户的输入，要对用户的输入进行校验，可以通过正则表达式，或限制长度，对单引号和双"-"进行转换等

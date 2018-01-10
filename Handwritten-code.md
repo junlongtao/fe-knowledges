@@ -1,3 +1,40 @@
+**短网址服务**
+```
+function ten2hex(num, n){
+  const letters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const arr = []
+  while(num){
+    arr.unshift(letters[num%n])
+    num = parseInt(num/n)
+  }
+
+  return arr.join('')
+}
+
+function shortEncode(str){
+  let res = 0
+  for(let i=0, len=str.length;i<len;i++){
+    res += str.charCodeAt(i)
+  }
+  console.log(res)
+  return ten2hex(res, 16)
+}
+
+function encode(url){
+  const res = 'http://zhihu.com/'+shortEncode(url)
+  localStorage.setItem(res, url)
+  return res
+}
+
+function decode(url){
+  return localStorage.getItem(url)||'404'
+}
+
+let testUrl = 'https://www.zhihu.com/remix/albums/931603443288780800'
+let res = encode(testUrl)
+decode(res)===testUrl
+```
+
 **手写事件侦听器，并要求兼容浏览器**
 ```JavaScript
 var eventUtil = {
