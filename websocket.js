@@ -34,7 +34,7 @@ var ws = new WebSocket('ws://localhost:5000')
 ws.onopen = function(){
 	console.log('connection open')
 }
-ws.opmessage = function(evt){
+ws.onmessage = function(evt){
 	console.log('receive message: '+evt.data)
 }
 ws.onclose = function(){
