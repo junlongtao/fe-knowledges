@@ -72,19 +72,47 @@
    
 
 **网络七层模型** 
+- 物理层：通过媒介传输比特,确定机械及电气规范（比特Bit）
+- 数据链路层：将比特组装成帧和点到点的传递（帧Frame）
 
-  - 物理层：通过媒介传输比特,确定机械及电气规范（比特Bit）
-  - 数据链路层：将比特组装成帧和点到点的传递（帧Frame）
+- 网络层IP：负责数据包从源到宿的传递和网际互连（包PackeT）
 
-  - 网络层IP：负责数据包从源到宿的传递和网际互连（包PackeT）
+- 传输层TCP UDP：提供端到端的可靠报文传递和错误恢复（段Segment）
 
-  - 传输层TCP UDP：提供端到端的可靠报文传递和错误恢复（段Segment）
+- 会话层：建立、管理和终止会话（会话协议数据单元SPDU）
+- 表示层：对数据进行翻译、加密和压缩（表示协议数据单元PPDU）
+- 应用层DNS FTP Email Telnet HTTP：允许访问OSI环境的手段（应用协议数据单元APDU）
 
-  - 会话层：建立、管理和终止会话（会话协议数据单元SPDU）
-  - 表示层：对数据进行翻译、加密和压缩（表示协议数据单元PPDU）
-  - 应用层DNS FTP Email Telnet HTTP：允许访问OSI环境的手段（应用协议数据单元APDU）
-  
 
 **304缓存原理**
 - 请求页面A =》返回页面A+ETag并缓存 =》再请求页面A，并传递ETag =》检查ETag，返回304
 
+
+**Content-type**
+```
+.*（ 二进制流，不知道下载文件类型） application/octet-stream
+.doc  application/msword
+.html text/html
+.ico  image/x-icon
+.java java/*
+.jpeg image/jpeg
+.jpg  application/x-jpg
+.jsp  text/html
+.mp4  video/mpeg4
+.pdf  application/pdf
+.png  application/x-png
+.ppt  application/x-ppt
+.xml  text/xml
+.apk  application/vnd.android.package-archive
+.ipa  application/vnd.iphone
+.txt  text/plain
+```
+
+
+**下载文件**
+```
+header("Accept-Ranges: bytes");
+header('Content-type: application/octet-stream; charset=utf8');
+header('Content-Disposition: attachment; filename=' . $model->origin_name . '.html');
+echo file_get_contents($resumeCollect ? $preview['with_mobile'] : $preview['without_mobile']);
+```

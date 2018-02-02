@@ -1,7 +1,32 @@
 ### JavaScript
 
-**parseInt第二个参数**
 
+**instanceof**
+```
+function instance_of(L, R) {
+  var O = R.prototype;
+  L = L.__proto__;
+  while (true) {
+    if (L === null)
+      return false;
+    if (O === L)
+      return true;
+    L = L.__proto__;
+  }
+}
+```
+
+
+**microtask macrotask task**
+- macrotasks: setTimeout ，setInterval， setImmediate，requestAnimationFrame,I/O ，UI渲染
+- microtasks: Promise， process.nextTick， Object.observe， MutationObserver
+
+
+**parseInt第二个参数**
+```
+parseInt('1000', 2)//8
+parseInt('a', 16)//10
+```
 
 **实现add(1)(2)(3)(4)==10**
 ```
@@ -141,7 +166,7 @@ setTimeout(a.b, 1000)//window
 
 
 **基本数据类型 引用数据类型**
-- 基本：undefined、null、boolean、number、string、symbol -- stack
+- 基本：string,number,boolean,undefined,null,symbol -- stack
 - 引用：object、array、function -- heap
 
 
