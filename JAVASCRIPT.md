@@ -1,6 +1,35 @@
 ### JavaScript
 
 
+**function referrence**
+```
+var a=0,b=0
+function A(a){
+  A = function(b){
+    console.log(a+b++)
+  }
+  console.log(a++)
+}
+A(1)//1
+A(2)//4
+
+```
+
+
+
+**变量提升失效**
+```
+function f1(a) {
+    console.log(a);// 10
+    var a=1;//变量声明提升var a=undefined 遇到函数传参，被忽略 => var a,so a=10
+    console.log(a);// 1 
+    console.log(arguments[0])// 1
+}
+f1(10)
+```
+
+
+
 **instanceof**
 ```
 function instance_of(L, R) {
