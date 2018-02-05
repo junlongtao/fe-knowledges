@@ -29,3 +29,22 @@ ajax('https://apitest.zhichou.com/user/info', 'get', null, function(res){
 
 
 ```
+
+
+**jsonp**
+```
+function jsonp(url,data, callback){
+	var script = document.createElement('script')
+	var callbackName = '__jp'+parseInt(Math.random()*10)
+	script.src = url+'?callback='+callbackName
+	script.onload = function(){
+		document.body.removeChild(script)
+	}
+	window[callbackName] = callback
+	document.body.appendChild(script)
+}
+
+jsonp('http://api.zhichou.com/talent/search', null, function(res){
+	console.log(res.data)
+})
+```
