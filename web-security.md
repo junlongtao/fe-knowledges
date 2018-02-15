@@ -7,6 +7,16 @@ fetch("http://api.xxx.com/user/detail?id=123'or''='")
 //xss = cross site scripting
 
 
+
+
+
+
+
+
+<input type="text" value="" onfocus="alert(document.cookie)"/>
+<input type="text" value=""/><script>alert(document.cookie)</script><!--"/>
+
+
 //csrf = cross site request forgery
 
 
@@ -21,9 +31,8 @@ fetch("http://api.xxx.com/user/detail?id=123'or''='")
   - 永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接
   - 不要把机密信息明文存放，请加密或者hash掉密码和敏感的信息
   
-**XSS原理及防范**
 
-- Xss(cross-site scripting)攻击指的是攻击者往Web页面里插入恶意html标签或者javascript代码。比如：攻击者在论坛中放一个看似安全的链接，骗取用户点击后，窃取cookie中的用户私密信息；或者攻击者在论坛中加一个恶意表单，当用户提交表单的时候，却把信息传送到攻击者的服务器中，而不是用户原本以为的信任站点
+
 
 **XSS防范方法**
 
@@ -52,16 +61,8 @@ fetch("http://api.xxx.com/user/detail?id=123'or''='")
 * CSRF(Cross Site Request Forgery)，跨站点伪造请求
   - 伪造合法请求，让用户在不知情的情况下以登录的身份访问，利用用户信任达到攻击目的
   
-**如何防范 Web 前端攻击？**
-
-* 不要信任任何外部传入的数据
-  - 针对用户输入作相关的格式检查、过滤等操作
-
-* 不要信任在任何传入的第三方数据
-  - 使用 CORS，设置 Access-Control-Allow-Origin
-
-* 更安全地使用 Cookie
-  - 设置Cookie为HttpOnly，禁止了JavaScript操作Cookie
-
-* 防止网页被其他网站内嵌为iframe
-  - 服务器端设置 X-Frame-Options 响应头，防止页面被内嵌
+**防范攻击**
+- 检查过滤输入
+- CORS，Access-Control-Allow-Origin
+- Cookie为HttpOnly
+- X-Frame-Options 防内嵌
