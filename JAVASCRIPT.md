@@ -30,7 +30,7 @@ function throttle(fn, delay) {
     if (remaining <=0) {
       fn.apply(context, args);
     } else {
-      setTimeout(fn, remaining);
+      timeout = setTimeout(fn, remaining);
     }
   }
 }
