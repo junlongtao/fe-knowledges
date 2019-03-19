@@ -29,6 +29,7 @@ function throttle(fn, delay) {
     clearTimeout(timeout);
     if (remaining <=0) {
       fn.apply(context, args);
+      startTime = Date.now();
     } else {
       timeout = setTimeout(fn, remaining);
     }
