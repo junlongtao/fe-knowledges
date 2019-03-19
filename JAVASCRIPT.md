@@ -1,5 +1,44 @@
 ### JavaScript
 
+**debounce & throttle**
+```
+// debounce
+// 最后一次事件delay后执行
+function debounce(fn, time) {
+  var timeout = null;
+  return function() {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(fn, time);
+  }
+}
+function doSomething() {
+  console.log(Math.random());
+}
+window.addEventListener('scroll', debounce(doSomething, 1000);
+
+// throttle
+// 立即执行，间隔delay就执行
+function throttle(fn, delay) {
+  var timeout = null;
+  var startTime = Date.now();
+  return function() {
+    var curTime = Date.now();
+    var remaining = delay - (curTime - startTime);
+    var context = this;
+    var args = arguments;
+    clearTimeout(timeout);
+    if (remaining <=0) {
+      fn.apply(context, args);
+    } else {
+      setTimeout(fn, remaining);
+    }
+  }
+}
+function doSomething() {
+  console.log(Math.random());
+}
+window.addEventListener('scroll', throttle(doSomething, 1000));
+```
 
 **function referrence**
 ```
