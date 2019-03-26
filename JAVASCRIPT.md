@@ -53,6 +53,8 @@ function A(a){
 A(1)//1
 A(2)//4
 
+![stack&heap](images/Lark20190320-132335.jpeg)
+
 ```
 
 
@@ -66,6 +68,20 @@ function f1(a) {
     console.log(arguments[0])// 1
 }
 f1(10)
+
+![stack&heap](images/Lark20190320-132351.jpeg)
+```
+
+
+
+**prototype & __proto__**
+```
+function Person(name) {
+  this.name = name;
+}
+var p = new Person('xiaoming');
+p.__proto__ === Person.prototype;
+
 ```
 
 

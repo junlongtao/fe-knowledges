@@ -2,6 +2,31 @@
 ### HTML
 ---
 
+
+**viewport**
+```
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1,
+    maximum-scale=1, user-scalable=no" />
+```
+
+
+**meta**
+```
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0
+    user-scalable=no">
+<meta name="description" content="main page contents......">
+<meta name="apple-mobile-web-app-title" content="简书">
+<meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/7465335">
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="0AqWuDgTpyNDTUextqfWGp+r5z3SUz4v2Q896eYX0DpzLepgfgltLkwjHftTTqUaHgyE2ZXl44I7u64xlAK0fQ==">
+
+
+```
+
+
+
 **语义化**
 - 语义标签,有意义的class 
   - 无样式后结构清晰
