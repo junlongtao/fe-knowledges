@@ -1,0 +1,14 @@
+<html>
+  <style>
+    body{
+    }
+  </style>
+  <body>
+    <div>window.onload vs document.ready</div>
+    <script>
+      window.onload = () => console.log('window onload');
+      document.addEventListener('DOMContentLoaded',
+        () => console.log('dom content load'));
+    </script>
+  </body>
+</html>

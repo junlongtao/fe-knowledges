@@ -1,7 +1,29 @@
+**react dom diff**
+```
+![shape1 -> shape2](images/c7ecf97eb61a4824f4005f1914112c15.png)
+C will unmount.
+C is created.
+B is updated.
+A is updated.
+C did mount.
+D is updated.
+R is updated.
+```
+
+
+
+**react性能优化**
+```
+保持组件稳定的DOM结构，通过CSS隐藏显示DOM
+添加唯一key
+
+```
+
+
 **React16新特性**
 ```
 //可返回string number boolean null portal fragments
-render() { 
+render() {
 	return [ 
     	<li key="A"/>First item</li>,
     	<li key="B"/>Second item</li>,

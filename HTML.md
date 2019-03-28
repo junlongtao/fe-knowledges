@@ -3,6 +3,16 @@
 ---
 
 
+**document.ready > window.onload**
+```
+window.onload = () => console.log('window onload');
+document.addEventListener('DOMContentLoaded',
+    () => console.log('dom content load'));
+document.ready === undefined
+```
+
+
+
 **viewport**
 ```
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1,
