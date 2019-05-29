@@ -38,7 +38,7 @@ document.ready === undefined
 
 
 **语义化**
-- 语义标签,有意义的class 
+- 语义化标签和class 
   - 无样式后结构清晰
   - 读屏器好读
   - 可维护
